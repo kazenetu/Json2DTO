@@ -123,6 +123,12 @@ public class PropertyTypeTest
         Assert.Equal(propertyType.ClassName, "InnerClassA");
         Assert.Equal(propertyType.IsList, isList);
 
+        classNo = 3;
+        propertyType = new PropertyType(classNo, isList);
+        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
+        Assert.Equal(propertyType.ClassName, "InnerClassB");
+        Assert.Equal(propertyType.IsList, isList);
+
         isList = true;
         classNo = 0;
         propertyType = new PropertyType(classNo, isList);
@@ -140,6 +146,12 @@ public class PropertyTypeTest
         propertyType = new PropertyType(classNo, isList);
         Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
         Assert.Equal(propertyType.ClassName, "InnerClassA");
+        Assert.Equal(propertyType.IsList, isList);
+
+        classNo = 3;
+        propertyType = new PropertyType(classNo, isList);
+        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
+        Assert.Equal(propertyType.ClassName, "InnerClassB");
         Assert.Equal(propertyType.IsList, isList);
     }
 }
