@@ -27,11 +27,11 @@ public class PropertyTypeTest
         var isList = false;
         var type = typeof(Object);
         var ex = Assert.ThrowsAny<ArgumentException>(() => new PropertyType(type, isList));
-        Assert.Equal(ex.Message, $"{nameof(type)}({type.Name}) is null");
+        Assert.Equal($"{nameof(type)}({type.Name}) is null", ex.Message);
 
         isList = true;
         ex = Assert.ThrowsAny<ArgumentException>(() => new PropertyType(type, isList));
-        Assert.Equal(ex.Message, $"{nameof(type)}({type.Name}) is null");
+        Assert.Equal($"{nameof(type)}({type.Name}) is null", ex.Message);
     }
 
     [Fact]
@@ -40,11 +40,11 @@ public class PropertyTypeTest
         var isList = false;
         var classNo = -1;
         var ex = Assert.ThrowsAny<ArgumentException>(() => new PropertyType(classNo, isList));
-        Assert.Equal(ex.Message, $"{nameof(classNo)} is negative value");
+        Assert.Equal($"{nameof(classNo)} is negative value", ex.Message);
 
         isList = true;
         ex = Assert.ThrowsAny<ArgumentException>(() => new PropertyType(classNo, isList));
-        Assert.Equal(ex.Message, $"{nameof(classNo)} is negative value");
+        Assert.Equal($"{nameof(classNo)} is negative value", ex.Message);
     }
 
     [Fact]
@@ -53,52 +53,52 @@ public class PropertyTypeTest
         var isList = false;
         Type type = typeof(string);
         PropertyType propertyType = new PropertyType(type, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.String);
-        Assert.Equal(propertyType.ClassName, string.Empty);
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.String, propertyType.Kind);
+        Assert.Equal(string.Empty, propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         type = typeof(decimal);
         propertyType = new PropertyType(type, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Decimal);
-        Assert.Equal(propertyType.ClassName, string.Empty);
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Decimal, propertyType.Kind);
+        Assert.Equal(string.Empty, propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         type = typeof(bool);
         propertyType = new PropertyType(type, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Bool);
-        Assert.Equal(propertyType.ClassName, string.Empty);
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Bool, propertyType.Kind);
+        Assert.Equal(string.Empty, propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         type = typeof(Nullable);
         propertyType = new PropertyType(type, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Null);
-        Assert.Equal(propertyType.ClassName, string.Empty);
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Null, propertyType.Kind);
+        Assert.Equal(string.Empty, propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         isList = true;
         type = typeof(string);
         propertyType = new PropertyType(type, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.String);
-        Assert.Equal(propertyType.ClassName, string.Empty);
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.String, propertyType.Kind);
+        Assert.Equal(string.Empty, propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         type = typeof(decimal);
         propertyType = new PropertyType(type, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Decimal);
-        Assert.Equal(propertyType.ClassName, string.Empty);
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Decimal, propertyType.Kind);
+        Assert.Equal(string.Empty, propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         type = typeof(bool);
         propertyType = new PropertyType(type, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Bool);
-        Assert.Equal(propertyType.ClassName, string.Empty);
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Bool, propertyType.Kind);
+        Assert.Equal(string.Empty, propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         type = typeof(Nullable);
         propertyType = new PropertyType(type, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Null);
-        Assert.Equal(propertyType.ClassName, string.Empty);
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Null, propertyType.Kind);
+        Assert.Equal(string.Empty, propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
     }
 
     [Fact]
@@ -107,51 +107,51 @@ public class PropertyTypeTest
         var isList = false;
         var classNo = 0;
         PropertyType propertyType = new PropertyType(classNo, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
-        Assert.Equal(propertyType.ClassName, "InnerClass");
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Class, propertyType.Kind);
+        Assert.Equal("InnerClass", propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         classNo = 1;
         propertyType = new PropertyType(classNo, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
-        Assert.Equal(propertyType.ClassName, "InnerClass");
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Class, propertyType.Kind);
+        Assert.Equal("InnerClass", propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         classNo = 2;
         propertyType = new PropertyType(classNo, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
-        Assert.Equal(propertyType.ClassName, "InnerClassA");
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Class, propertyType.Kind);
+        Assert.Equal("InnerClassA", propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         classNo = 3;
         propertyType = new PropertyType(classNo, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
-        Assert.Equal(propertyType.ClassName, "InnerClassB");
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Class, propertyType.Kind);
+        Assert.Equal("InnerClassB", propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         isList = true;
         classNo = 0;
         propertyType = new PropertyType(classNo, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
-        Assert.Equal(propertyType.ClassName, "InnerClass");
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Class, propertyType.Kind);
+        Assert.Equal("InnerClass", propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         classNo = 1;
         propertyType = new PropertyType(classNo, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
-        Assert.Equal(propertyType.ClassName, "InnerClass");
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Class, propertyType.Kind);
+        Assert.Equal("InnerClass", propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         classNo = 2;
         propertyType = new PropertyType(classNo, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
-        Assert.Equal(propertyType.ClassName, "InnerClassA");
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Class, propertyType.Kind);
+        Assert.Equal("InnerClassA", propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
 
         classNo = 3;
         propertyType = new PropertyType(classNo, isList);
-        Assert.Equal(propertyType.Kind, PropertyType.Kinds.Class);
-        Assert.Equal(propertyType.ClassName, "InnerClassB");
-        Assert.Equal(propertyType.IsList, isList);
+        Assert.Equal(PropertyType.Kinds.Class, propertyType.Kind);
+        Assert.Equal("InnerClassB", propertyType.ClassName);
+        Assert.Equal(isList, propertyType.IsList);
     }
 }
