@@ -35,14 +35,14 @@ public class ClassEntity
     /// <summary>
     /// プロパティ追加
     /// </summary>
-    /// <param name="Property">追加対象</param>
-    public void AddProperty(PropertyValueObject Property)
+    /// <param name="property">追加対象</param>
+    public void AddProperty(PropertyValueObject property)
     {
         // 入力チェック
-        if (Property is null) throw new ArgumentException($"{nameof(Property)} is null");
+        if (property is null) throw new ArgumentException($"{nameof(property)} is null");
 
         // プロパティリスト追加
-        propertyies.Add(Property);
+        propertyies.Add(property);
     }
 
     /// <summary>
