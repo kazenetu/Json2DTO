@@ -12,6 +12,7 @@ public class ClassEntityTest
     public void ExceptionClassNameNull()
     {
         string? className = null;
+        #pragma warning disable
         var ex = Assert.ThrowsAny<ArgumentException>(() => ClassEntity.Create(className));
         Assert.Equal("className is null", ex.Message);
     }
@@ -29,6 +30,7 @@ public class ClassEntityTest
     {
         string className = "ClassName";
         var classEntity = ClassEntity.Create(className);
+        #pragma warning disable
         var ex = Assert.ThrowsAny<ArgumentException>(() => classEntity.AddProperty(null));
         Assert.Equal("property is null", ex.Message);
     }

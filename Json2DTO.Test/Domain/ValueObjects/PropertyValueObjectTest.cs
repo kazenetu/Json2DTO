@@ -25,6 +25,7 @@ public class PropertyValueObjectTest
     public void ExceptionNameNull()
     {
         var proprtyType = new PropertyType(typeof(string), false);
+        #pragma warning disable
         var ex = Assert.ThrowsAny<ArgumentException>(() => new PropertyValueObject(null, proprtyType));
         Assert.Equal("name is null", ex.Message);
     }
