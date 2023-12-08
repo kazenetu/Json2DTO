@@ -7,20 +7,6 @@ namespace Json2DTO.Test.Domain.ValueObjects;
 /// </summary>
 public class PropertyValueObjectTest
 {
-    /// <summary>
-    /// Setup
-    /// </summary>
-    public PropertyValueObjectTest()
-    {
-    }
-
-    /// <summary>
-    /// Teardown
-    /// </summary>
-    public void Dispose()
-    {
-    }
-
     [Fact]
     public void ExceptionNameNull()
     {
