@@ -11,7 +11,7 @@ public class ClassesEntity
     /// 非公開インナークラスリスト
     /// </summary>
     /// <returns>非公開インナークラスリスト</returns>
-    public List<ClassEntity> innerClasses = new();
+    private List<ClassEntity> innerClasses = new();
 
     /// <summary>
     /// 読み取り用インナークラスリスト
