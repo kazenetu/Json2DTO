@@ -67,9 +67,6 @@ public class ClassesEntity
     /// <param name="Property">追加対象</param>
     public void AddRootProperty(PropertyValueObject Property)
     {
-        // ルートクラス存在チェック
-        if (rootClass is null) throw new Exception($"{nameof(rootClass)} is null");
-
         // プロパティ追加
         rootClass?.AddProperty(Property);
     }
