@@ -30,12 +30,6 @@ public record PropertyValueObject
     public PropertyType? Type { get; init; } = null;
 
     /// <summary>
-    /// 初期値
-    /// </summary>
-    /// <value>初期値</value>
-    public string DefaultValue { get; init; } = string.Empty;
-
-    /// <summary>
     /// コンストラクタ
     /// </summary>
     /// <param name="name">クラス名称</param>
@@ -44,12 +38,6 @@ public record PropertyValueObject
     {
         // パラメータチェック
         if (string.IsNullOrEmpty(name)) throw new ArgumentException($"{nameof(name)} is null");
-
-        // デフォルト値設定
-        if (propertyType.ToString() is "string" or "object")
-        {
-            DefaultValue = "string.Empty";
-        }
 
         // 名前とプロパティ型の設定
         Name = name;
