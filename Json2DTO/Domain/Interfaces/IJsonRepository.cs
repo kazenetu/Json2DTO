@@ -8,6 +8,13 @@ namespace Domain.Interfaces;
 public interface IJsonRepository
 {
     /// <summary>
+    /// ディレクトリ内のJSONファイルを読み込んでClass情報リストを返す
+    /// </summary>
+    /// <param name="filePath">JSONファイル</param>
+    /// <returns>Classエンティティリスト</returns>
+    IReadOnlyList<ClassesEntity> CreateClassEntityFromFiles(string directoryPath);
+
+    /// <summary>
     /// JSONファイルを読み込んでClass情報を返す
     /// </summary>
     /// <param name="filePath">JSONファイル</param>

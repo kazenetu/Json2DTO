@@ -25,6 +25,27 @@ public class JsonRepository : IJsonRepository
         new JsonPropertyNull()
     };
 
+    /// <summary>
+    /// ディレクトリ内のJSONファイルを読み込んでClass情報リストを返す
+    /// </summary>
+    /// <param name="filePath">JSONファイル</param>
+    /// <returns>Classエンティティリスト</returns>
+    public IReadOnlyList<ClassesEntity> CreateClassEntityFromFiles(string directoryPath)
+    {
+        // 入力チェック
+        if(Directory.Exists(directoryPath)) throw new ArgumentException($"{nameof(directoryPath)} is not directory");
+
+        var files = Directory.EnumerateDirectories(directoryPath);
+        if (files.Any()) throw new ArgumentException($"{nameof(directoryPath)} is not file");
+
+        // すべてのファイルの解析結果をリストに追加
+        var result = new List<ClassesEntity>();
+        foreach(var filePath in files)
+        {
+            result.Add(CreateClassEntityFromFile(filePath));
+        }
+        return result;
+    }
 
     /// <summary>
     /// JSONファイルを読み込んでClass情報を返す
