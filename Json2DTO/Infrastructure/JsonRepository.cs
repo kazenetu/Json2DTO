@@ -54,15 +54,13 @@ public class JsonRepository : IJsonRepository
     /// <returns>Classエンティティ</returns>
     public ClassesEntity CreateClassEntityFromFile(string filePath)
     {
-        var result = string.Empty;
-
         // ファイル読み込み
-        result = File.ReadAllText(filePath);
+        var json = File.ReadAllText(filePath);
 
         // 文字列として読み取り
         var rootClassName = Path.GetFileNameWithoutExtension(filePath);
         rootClassName = $"{rootClassName.Substring(0, 1).ToUpper()}{rootClassName.Substring(1)}";
-        return CreateClassEntityFromString(result, rootClassName);
+        return CreateClassEntityFromString(json, rootClassName);
     }
 
     /// <summary>
