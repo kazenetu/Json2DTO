@@ -73,6 +73,10 @@ public class JsonRepository : IJsonRepository
     /// <param name="rootClassName">ルートクラス名</param>
     public ClassesEntity CreateClassEntityFromString(string json, string rootClassName)
     {
+        // パラメータチェック
+        if (string.IsNullOrEmpty(json)) throw new ArgumentException($"{nameof(json)} is null");
+        if (string.IsNullOrEmpty(rootClassName)) throw new ArgumentException($"{nameof(rootClassName)} is null");
+
         rootClassName = $"{rootClassName.Substring(0, 1).ToUpper()}{rootClassName.Substring(1)}";
         var classesEntity = ClassesEntity.Create(rootClassName);
 
@@ -103,10 +107,21 @@ public class JsonRepository : IJsonRepository
     /// <param name="innerClassNo">インナークラス番号</param>
     private ClassEntity ProcessJsonDocument(string json, string className, ref ClassesEntity classesEntity, int innerClassNo)
     {
+        // JSON文字列をパース
+        JsonDocument jsonDocument = null;
+        try
+        {
+            jsonDocument = JsonDocument.Parse(json);
+        }
+        catch(Exception ex)
+        {
+            throw new Exception($"JSON parse error:{json}");
+        }
+
         // Classインスタンス設定
         var classEntity = ClassEntity.Create(className);
 
-        var jsonDocument = JsonDocument.Parse(json);
+        // JSON文字列解析・変換
         var rootElement = jsonDocument.RootElement;
         foreach (var element in rootElement.EnumerateObject())
         {
