@@ -32,11 +32,11 @@ public class JsonRepository : IJsonRepository
     /// <returns>Classエンティティリスト</returns>
     public IReadOnlyList<ClassesEntity> CreateClassEntityFromFiles(string directoryPath)
     {
-        // 入力チェック
-        if(Directory.Exists(directoryPath)) throw new ArgumentException($"{nameof(directoryPath)} is not directory");
+        // パラメータチェック
+        if(Directory.Exists(directoryPath)) throw new ArgumentException($"{directoryPath} is not directory");
 
         var files = Directory.EnumerateDirectories(directoryPath);
-        if (files.Any()) throw new ArgumentException($"{nameof(directoryPath)} is not file");
+        if (files.Any()) throw new ArgumentException($"{directoryPath} is not file");
 
         // すべてのファイルの解析結果をリストに追加
         var result = new List<ClassesEntity>();
@@ -54,12 +54,18 @@ public class JsonRepository : IJsonRepository
     /// <returns>Classエンティティ</returns>
     public ClassesEntity CreateClassEntityFromFile(string filePath)
     {
+        // パラメータチェック
+        if(File.Exists(filePath)) throw new ArgumentException($"{filePath} is not exixts");
+
         // ファイル読み込み
         var json = File.ReadAllText(filePath);
 
         // 文字列として読み取り
-        var rootClassName = Path.GetFileNameWithoutExtension(filePath);
-        rootClassName = $"{rootClassName.Substring(0, 1).ToUpper()}{rootClassName.Substring(1)}";
+        var rootClassName = Path.GetFileNameWithoutExtension(filePath).ToUpper();
+        if(rootClassName.Length > 1)
+        {
+            rootClassName = $"{rootClassName.Substring(0, 1)}{rootClassName.Substring(1).ToLower()}";
+        }
         return CreateClassEntityFromString(json, rootClassName);
     }
 
@@ -106,22 +112,28 @@ public class JsonRepository : IJsonRepository
     private ClassEntity ProcessJsonDocument(string json, string className, ref ClassesEntity classesEntity, int innerClassNo)
     {
         // JSON文字列をパース
-        JsonDocument jsonDocument = null;
+        JsonDocument jsonDocument;
         try
         {
             jsonDocument = JsonDocument.Parse(json);
         }
-        catch(Exception ex)
+        catch
         {
-            throw new Exception($"JSON parse error:{json}");
+            throw new ArgumentException($"JSON parse error:{json}");
         }
 
         // Classインスタンス設定
         var classEntity = ClassEntity.Create(className);
 
-        // JSON文字列解析・変換
+        // ルート要素と子要素配列を取得
         var rootElement = jsonDocument.RootElement;
-        foreach (var element in rootElement.EnumerateObject())
+        var elements = rootElement.EnumerateObject();
+
+        // 要素がない場合はエラーとする
+        if (!elements.Any()) throw new ArgumentException($"JSON elements none:{json}");
+
+        // JSON文字列解析・変換
+        foreach (var element in elements)
         {
             var jsonProperty = JsonProperties.Where(item => item.GetKeyName() == element.Value.ValueKind).FirstOrDefault();
             if (jsonProperty is null) throw new Exception($"{element.Value.ValueKind} is can not use");
