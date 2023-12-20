@@ -61,11 +61,7 @@ public class JsonRepository : IJsonRepository
         var json = File.ReadAllText(filePath);
 
         // 文字列として読み取り
-        var rootClassName = Path.GetFileNameWithoutExtension(filePath).ToUpper();
-        if(rootClassName.Length > 1)
-        {
-            rootClassName = $"{rootClassName.Substring(0, 1)}{rootClassName.Substring(1).ToLower()}";
-        }
+        var rootClassName = Path.GetFileNameWithoutExtension(filePath);
         return CreateClassEntityFromString(json, rootClassName);
     }
 
@@ -80,8 +76,11 @@ public class JsonRepository : IJsonRepository
         // パラメータチェック
         if (string.IsNullOrEmpty(json)) throw new ArgumentException($"{nameof(json)} is null");
         if (string.IsNullOrEmpty(rootClassName)) throw new ArgumentException($"{nameof(rootClassName)} is null");
+        if(rootClassName.Length > 1)
+        {
+            rootClassName = $"{rootClassName.Substring(0, 1).ToUpper()}{rootClassName.Substring(1)}";
+        }
 
-        rootClassName = $"{rootClassName.Substring(0, 1).ToUpper()}{rootClassName.Substring(1)}";
         var classesEntity = ClassesEntity.Create(rootClassName);
 
         // JSON文字列読み込み
