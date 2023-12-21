@@ -80,6 +80,10 @@ public class JsonRepository : IJsonRepository
         {
             rootClassName = $"{rootClassName.Substring(0, 1).ToUpper()}{rootClassName.Substring(1)}";
         }
+        else
+        {
+            rootClassName = rootClassName.Substring(0, 1).ToUpper();
+        }
 
         var classesEntity = ClassesEntity.Create(rootClassName);
 
