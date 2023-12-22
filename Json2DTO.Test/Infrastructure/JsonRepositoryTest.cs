@@ -84,7 +84,7 @@ public class JsonRepositoryTest
     }
 
     [Fact]
-    public void SuccessFromString()
+    public void Success()
     {
         var json = @"{
             ""prop_string"" : ""string""
@@ -148,7 +148,7 @@ public class JsonRepositoryTest
     }
 
     [Fact]
-    public void SuccessFromStringShortClassName()
+    public void SuccessShortClassName()
     {
         var json = @"{
             ""prop_string"" : ""string""
@@ -167,5 +167,146 @@ public class JsonRepositoryTest
         Assert.Equal(string.Empty, rootClass.Properties[index].PropertyTypeClassName);
         Assert.Equal(PropertyType.Kinds.String, rootClass.Properties[index].Type?.Kind);
         Assert.Equal(false, rootClass.Properties[index].Type?.IsList);
+    }
+
+    [Fact]
+    public void SuccessInneerClass()
+    {
+        var json = @"{
+            ""propObjct"" : 
+            {
+                ""propObjString"":""propObjString""
+            }
+            , ""propNumber"":10
+        }";
+
+        var rootClassName = "rootClass";
+
+        var repository = new JsonRepository();
+        var classesEntity = repository.CreateClassEntityFromString(json, rootClassName);
+
+        var rootClass = classesEntity.RootClass;
+        Assert.Equal("RootClass", rootClass.Name);
+        Assert.Equal(2, rootClass.Properties.Count);
+
+        var index = 0;
+        Assert.Equal("propObjct", rootClass.Properties[index].Name);
+        Assert.Equal("InnerClass", rootClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.Class, rootClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, rootClass.Properties[index].Type?.IsList);
+
+        index = 1;
+        Assert.Equal("propNumber", rootClass.Properties[index].Name);
+        Assert.Equal(string.Empty, rootClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.Decimal, rootClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, rootClass.Properties[index].Type?.IsList);
+
+        // InnerClass
+        Assert.Equal(1, classesEntity.InnerClasses.Count);
+
+        var innerClass = classesEntity.InnerClasses[0];
+        Assert.Equal("InnerClass", innerClass.Name);
+        Assert.Equal(1, innerClass.Properties.Count);
+
+        index = 0;
+        Assert.Equal("propObjString", innerClass.Properties[index].Name);
+        Assert.Equal(string.Empty, innerClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.String, innerClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
+    }
+
+    [Fact]
+    public void SuccessInneerClassNest()
+    {
+        var json = @"{
+            ""propObjct"" : 
+            {
+                ""propSubObjct"":
+                {
+                    ""propString"" : ""string""
+                    , ""propNumber"":10
+                    , ""propDate"":""2022/01/01 10:11:12""
+                    , ""propTrue"":true
+                    , ""propFalse"":false
+                    , ""propNull"":null
+                    , ""propArray"":[1,2,3]
+                }
+            }
+        }";
+        var rootClassName = "rootClass";
+
+        var repository = new JsonRepository();
+        var classesEntity = repository.CreateClassEntityFromString(json, rootClassName);
+
+        var rootClass = classesEntity.RootClass;
+        Assert.Equal("RootClass", rootClass.Name);
+        Assert.Equal(1, rootClass.Properties.Count);
+
+        var index = 0;
+        Assert.Equal("propObjct", rootClass.Properties[index].Name);
+        Assert.Equal("InnerClass", rootClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.Class, rootClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, rootClass.Properties[index].Type?.IsList);
+
+        // InnerClass
+        Assert.Equal(2, classesEntity.InnerClasses.Count);
+
+        // InnerClassA
+        var innerClass = classesEntity.InnerClasses[0];
+        Assert.Equal("InnerClassA", innerClass.Name);
+        Assert.Equal(7, innerClass.Properties.Count);
+
+        index = 0;
+        Assert.Equal("propString", innerClass.Properties[index].Name);
+        Assert.Equal(string.Empty, innerClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.String, innerClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
+
+        index = 1;
+        Assert.Equal("propNumber", innerClass.Properties[index].Name);
+        Assert.Equal(string.Empty, innerClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.Decimal, innerClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
+
+        index = 2;
+        Assert.Equal("propDate", innerClass.Properties[index].Name);
+        Assert.Equal(string.Empty, innerClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.String, innerClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
+
+        index = 3;
+        Assert.Equal("propTrue", innerClass.Properties[index].Name);
+        Assert.Equal(string.Empty, innerClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.Bool, innerClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
+
+        index = 4;
+        Assert.Equal("propFalse", innerClass.Properties[index].Name);
+        Assert.Equal(string.Empty, innerClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.Bool, innerClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
+
+        index = 5;
+        Assert.Equal("propNull", innerClass.Properties[index].Name);
+        Assert.Equal(string.Empty, innerClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.Null, innerClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
+
+        index = 6;
+        Assert.Equal("propArray", innerClass.Properties[index].Name);
+        Assert.Equal(string.Empty, innerClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.Decimal, innerClass.Properties[index].Type?.Kind);
+        Assert.Equal(true, innerClass.Properties[index].Type?.IsList);
+
+        // InnerClass
+        innerClass = classesEntity.InnerClasses[1];
+        Assert.Equal("InnerClass", innerClass.Name);
+        Assert.Equal(1, innerClass.Properties.Count);
+
+        index = 0;
+        Assert.Equal("propSubObjct", innerClass.Properties[index].Name);
+        Assert.Equal("InnerClassA", innerClass.Properties[index].PropertyTypeClassName);
+        Assert.Equal(PropertyType.Kinds.Class, innerClass.Properties[index].Type?.Kind);
+        Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
     }
 }
