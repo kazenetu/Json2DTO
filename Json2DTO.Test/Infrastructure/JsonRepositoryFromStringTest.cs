@@ -6,9 +6,9 @@ using Infrastructure.JsonProperties;
 namespace Json2DTO.Test.Infrastructure;
 
 /// <summary>
-/// JSON読み込みリポジトリのテスト
+/// JSON読み込みリポジトリのテスト:FromString
 /// </summary>
-public class JsonRepositoryTest
+public class JsonRepositoryFromStringTest
 {
     [Fact]
     public void ExceptionJsonParamEmpty()
