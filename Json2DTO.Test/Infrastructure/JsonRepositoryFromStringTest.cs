@@ -11,10 +11,42 @@ namespace Json2DTO.Test.Infrastructure;
 public class JsonRepositoryFromStringTest
 {
     [Fact]
+    public void ExceptionJsonParamNull()
+    {
+        string? json = null;
+        var rootClassName = "rootClass";
+
+        var repository = new JsonRepository();
+        #pragma warning disable
+        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntityFromString(json, rootClassName));
+        Assert.Equal($"{nameof(json)} is null", ex.Message);
+    }
+
+    [Fact]
+    public void ExceptionRootClassNameParamNull()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+            , ""propNumber"":10
+            , ""prop_Date"":""2022/01/01 10:11:12""
+            , ""PropTrue"":true
+            , ""propFalse"":false
+            , ""propNull"":null
+            , ""propArray"":[1,2,3]
+        }";
+        string? rootClassName = null;
+
+        var repository = new JsonRepository();
+        #pragma warning disable
+        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntityFromString(json, rootClassName));
+        Assert.Equal($"{nameof(rootClassName)} is null", ex.Message);
+    }
+
+    [Fact]
     public void ExceptionJsonParamEmpty()
     {
         var json = string.Empty;
-        var rootClassName = string.Empty;
+        var rootClassName = "rootClass";
 
         var repository = new JsonRepository();
         var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntityFromString(json, rootClassName));
