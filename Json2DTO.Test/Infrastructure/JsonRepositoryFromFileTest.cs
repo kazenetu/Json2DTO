@@ -287,7 +287,7 @@ public class JsonRepositoryFromFileTest: IDisposable
         var classesEntity = repository.CreateClassEntityFromFile(CreatedFilePath);
 
         var rootClass = classesEntity.RootClass;
-        Assert.Equal("RootClass", rootClass.Name);
+        Assert.Equal("InneerClassNest", rootClass.Name);
         Assert.Equal(1, rootClass.Properties.Count);
 
         var index = 0;
@@ -346,9 +346,9 @@ public class JsonRepositoryFromFileTest: IDisposable
         Assert.Equal(PropertyType.Kinds.Decimal, innerClass.Properties[index].Type?.Kind);
         Assert.Equal(true, innerClass.Properties[index].Type?.IsList);
 
-        // InneerClassNest
+        // InnerClass
         innerClass = classesEntity.InnerClasses[1];
-        Assert.Equal("InneerClassNest", innerClass.Name);
+        Assert.Equal("InnerClass", innerClass.Name);
         Assert.Equal(1, innerClass.Properties.Count);
 
         index = 0;
