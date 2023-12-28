@@ -20,8 +20,14 @@ public class JsonRepositoryFromFilesTest: IDisposable
     /// </summary>
     public void Dispose()
     {
-        // ディレクトリ削除
-        Directory.Delete(CreatedDirectoryPath, true);
+        if(!Directory.Exists(CreatedDirectoryPath)) return;
+
+        // ファイル削除
+        var files = Directory.GetFiles(CreatedDirectoryPath);
+        foreach (var file in files)
+        {
+            File.Delete(file);
+        }
     }
 
     /// <summary>
