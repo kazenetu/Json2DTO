@@ -36,7 +36,7 @@ public class JsonRepository : IJsonRepository
         if(!Directory.Exists(directoryPath)) throw new ArgumentException($"{directoryPath} is not directory");
 
         var files = Directory.EnumerateDirectories(directoryPath);
-        if (files.Any()) throw new ArgumentException($"{directoryPath} is not file");
+        if (!files.Any()) throw new ArgumentException($"{directoryPath} is not file");
 
         // すべてのファイルの解析結果をリストに追加
         var result = new List<ClassesEntity>();
