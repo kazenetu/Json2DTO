@@ -55,7 +55,7 @@ public class JsonRepository : IJsonRepository
     public ClassesEntity CreateClassEntityFromFile(string filePath)
     {
         // パラメータチェック
-        if(!File.Exists(filePath)) throw new ArgumentException($"{filePath} is not exixts");
+        if(!File.Exists(filePath)) throw new ArgumentException($"{filePath} is not exists");
 
         // ファイル読み込み
         var json = File.ReadAllText(filePath);

@@ -56,7 +56,7 @@ public class JsonRepositoryFromFileTest: IDisposable
         var repository = new JsonRepository();
         #pragma warning disable
         var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntityFromFile(filePath));
-        Assert.Equal($" is not exixts", ex.Message);
+        Assert.Equal($" is not exists", ex.Message);
     }
 
     [Fact]
@@ -66,7 +66,7 @@ public class JsonRepositoryFromFileTest: IDisposable
 
         var repository = new JsonRepository();
         var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntityFromFile(filePath));
-        Assert.Equal($" is not exixts", ex.Message);
+        Assert.Equal($" is not exists", ex.Message);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class JsonRepositoryFromFileTest: IDisposable
 
         var repository = new JsonRepository();
         var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntityFromFile(filePath));
-        Assert.Equal($"Dummy is not exixts", ex.Message);
+        Assert.Equal($"Dummy is not exists", ex.Message);
     }
 
     [Fact]
