@@ -11,6 +11,38 @@ namespace Infrastructure;
 public class JsonRepository : IJsonRepository
 {
     /// <summary>
+    /// Json文字列か否か
+    /// </summary>
+    /// <param name="target">確認対象文字列</param>
+    /// <returns>Json文字列/以外</returns>
+    public bool IsJsonString(string target)
+    {
+        return target.Contains('{');
+    }
+
+    /// <summary>
+    /// ファイルパスか否か
+    /// </summary>
+    /// <param name="target">確認対象文字列</param>
+    /// <returns>ファイルパス/以外</returns>
+    public bool IsFilePath(string target)
+    {
+        if(IsJsonString(target)) return false;
+        return File.Exists(target);
+    }
+
+    /// <summary>
+    /// ディレクトリパスか否か
+    /// </summary>
+    /// <param name="target">確認対象文字列</param>
+    /// <returns>ディレクトリパス/以外</returns>
+    public bool IsDirectoryPath(string target)
+    {
+        if(IsJsonString(target)) return false;
+        return Directory.Exists(target);
+    }
+
+    /// <summary>
     /// Jsonプロパティリスト
     /// </summary>
     /// <typeparam name="IJsonProperty">Jsonプロパティインターフェイス</typeparam>
