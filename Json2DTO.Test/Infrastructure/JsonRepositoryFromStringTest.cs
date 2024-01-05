@@ -116,6 +116,39 @@ public class JsonRepositoryFromStringTest
     }
 
     [Fact]
+    public void ExceptionIsFilePath()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+        }";
+
+        var repository = new JsonRepository();
+        Assert.Equal(false, repository.IsFilePath(json));
+    }
+
+    [Fact]
+    public void ExceptionIsDirectoryPath()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+        }";
+
+        var repository = new JsonRepository();
+        Assert.Equal(false, repository.IsDirectoryPath(json));
+    }
+
+    [Fact]
+    public void SuccessIsString()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+        }";
+
+        var repository = new JsonRepository();
+        Assert.Equal(true, repository.IsJsonString(json));
+    }
+
+    [Fact]
     public void Success()
     {
         var json = @"{

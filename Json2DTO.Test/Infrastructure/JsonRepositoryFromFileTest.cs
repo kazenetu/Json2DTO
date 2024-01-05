@@ -126,6 +126,45 @@ public class JsonRepositoryFromFileTest: IDisposable
     }
 
     [Fact]
+    public void ExceptionIsString()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+        }";
+        var rootClassName = "SuccessSingleFile";
+        CreateFile(json, $"{rootClassName}.json");
+
+        var repository = new JsonRepository();
+        Assert.Equal(false, repository.IsJsonString(CreatedFilePath));
+    }
+
+    [Fact]
+    public void ExceptionIsDirectoryPath()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+        }";
+        var rootClassName = "SuccessSingleFile";
+        CreateFile(json, $"{rootClassName}.json");
+
+        var repository = new JsonRepository();
+        Assert.Equal(false, repository.IsDirectoryPath(CreatedFilePath));
+    }
+
+    [Fact]
+    public void SuccessIsFilePath()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+        }";
+        var rootClassName = "SuccessSingleFile";
+        CreateFile(json, $"{rootClassName}.json");
+
+        var repository = new JsonRepository();
+        Assert.Equal(true, repository.IsFilePath(CreatedFilePath));
+    }
+
+    [Fact]
     public void Success()
     {
         var json = @"{
