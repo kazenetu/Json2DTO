@@ -21,7 +21,7 @@ public class JsonRepositoryStub : IJsonRepository
     /// <summary>
     /// 結果の状態
     /// </summary>
-    private static Mode IsResult { set;get; } = Mode.None;
+    public static Mode IsResult { set;get; } = Mode.None;
 
     /// <summary>
     /// Json文字列か否か
