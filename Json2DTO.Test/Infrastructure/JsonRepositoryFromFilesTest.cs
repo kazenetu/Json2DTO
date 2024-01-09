@@ -124,6 +124,45 @@ public class JsonRepositoryFromFilesTest: IDisposable
     }
 
     [Fact]
+    public void ExceptionIsString()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+        }";
+        var rootClassName = "SuccessSingleFile";
+        CreateFile(json, $"{rootClassName}.json");
+
+        var repository = new JsonRepository();
+        Assert.Equal(false, repository.IsJsonString(CreatedDirectoryPath));
+    }
+
+    [Fact]
+    public void ExceptionIsFilePath()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+        }";
+        var rootClassName = "SuccessSingleFile";
+        CreateFile(json, $"{rootClassName}.json");
+
+        var repository = new JsonRepository();
+        Assert.Equal(false, repository.IsFilePath(CreatedDirectoryPath));
+    }
+
+    [Fact]
+    public void SuccessIsDirectoryPath()
+    {
+        var json = @"{
+            ""prop_string"" : ""string""
+        }";
+        var rootClassName = "SuccessSingleFile";
+        CreateFile(json, $"{rootClassName}.json");
+
+        var repository = new JsonRepository();
+        Assert.Equal(true, repository.IsDirectoryPath(CreatedDirectoryPath));
+    }
+
+    [Fact]
     public void SuccessSingleFile()
     {
         var json = @"{
@@ -197,5 +236,4 @@ public class JsonRepositoryFromFilesTest: IDisposable
         Assert.Equal(PropertyType.Kinds.Decimal, rootClass.Properties[index].Type?.Kind);
         Assert.Equal(false, rootClass.Properties[index].Type?.IsList);
     }
-
 }

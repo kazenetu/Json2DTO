@@ -8,6 +8,27 @@ namespace Domain.Interfaces;
 public interface IJsonRepository
 {
     /// <summary>
+    /// Json文字列か否か
+    /// </summary>
+    /// <param name="target">確認対象文字列</param>
+    /// <returns>Json文字列/以外</returns>
+    bool IsJsonString(string target);
+
+    /// <summary>
+    /// ファイルパスか否か
+    /// </summary>
+    /// <param name="target">確認対象文字列</param>
+    /// <returns>ファイルパス/以外</returns>
+    bool IsFilePath(string target);
+
+    /// <summary>
+    /// ディレクトリパスか否か
+    /// </summary>
+    /// <param name="target">確認対象文字列</param>
+    /// <returns>ディレクトリパス/以外</returns>
+    bool IsDirectoryPath(string target);
+
+    /// <summary>
     /// ディレクトリ内のJSONファイルを読み込んでClass情報リストを返す
     /// </summary>
     /// <param name="filePath">JSONファイル</param>
