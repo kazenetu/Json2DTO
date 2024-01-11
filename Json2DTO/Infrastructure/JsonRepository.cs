@@ -58,6 +58,39 @@ public class JsonRepository : IJsonRepository
     };
 
     /// <summary>
+    /// Json文字列/ファイルパス/ディレクトリパスを読み込んで Classエンティティリストを返す
+    /// </summary>
+    /// <param name="target">対象文字列(Json文字列/ファイルパス/ディレクトリパス)</param>
+    /// <param name="className">クラス名(Json文字列時のみ必須)</param>
+    /// <returns>Classエンティティリスト</returns>
+    public IReadOnlyList<ClassesEntity> CreateClassEntity(string target, string className = "")
+    {
+        // パラメータチェック
+        if (string.IsNullOrEmpty(target)) throw new ArgumentException($"{nameof(target)} is null");
+
+        var classesEnties = new List<ClassesEntity>();
+
+        // 判定処理
+        if(IsJsonString(target)){
+            classesEnties.Add(CreateClassEntityFromString(target, className));
+        }
+        else if(IsDirectoryPath(target))
+        {
+            classesEnties.AddRange(CreateClassEntityFromFiles(target));
+        }
+        else if(IsFilePath(target))
+        {
+            classesEnties.Add(CreateClassEntityFromFile(target));
+        }
+        else
+        {
+            throw new ArgumentException($"{nameof(target)} is not exists");
+        }
+
+        return classesEnties;
+    }
+
+    /// <summary>
     /// ディレクトリ内のJSONファイルを読み込んでClass情報リストを返す
     /// </summary>
     /// <param name="filePath">JSONファイル</param>
