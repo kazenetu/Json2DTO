@@ -15,7 +15,7 @@ public class JsonRepository : IJsonRepository
     /// </summary>
     /// <param name="target">確認対象文字列</param>
     /// <returns>Json文字列/以外</returns>
-    public bool IsJsonString(string target)
+    private bool IsJsonString(string target)
     {
         return target.Contains('{');
     }
@@ -25,7 +25,7 @@ public class JsonRepository : IJsonRepository
     /// </summary>
     /// <param name="target">確認対象文字列</param>
     /// <returns>ファイルパス/以外</returns>
-    public bool IsFilePath(string target)
+    private bool IsFilePath(string target)
     {
         if(IsJsonString(target)) return false;
         return File.Exists(target);
@@ -36,7 +36,7 @@ public class JsonRepository : IJsonRepository
     /// </summary>
     /// <param name="target">確認対象文字列</param>
     /// <returns>ディレクトリパス/以外</returns>
-    public bool IsDirectoryPath(string target)
+    private bool IsDirectoryPath(string target)
     {
         if(IsJsonString(target)) return false;
         return Directory.Exists(target);
@@ -95,7 +95,7 @@ public class JsonRepository : IJsonRepository
     /// </summary>
     /// <param name="filePath">JSONファイル</param>
     /// <returns>Classエンティティリスト</returns>
-    public IReadOnlyList<ClassesEntity> CreateClassEntityFromFiles(string directoryPath)
+    private IReadOnlyList<ClassesEntity> CreateClassEntityFromFiles(string directoryPath)
     {
         // パラメータチェック
         if(!Directory.Exists(directoryPath)) throw new ArgumentException($"{directoryPath} is not directory");
@@ -117,7 +117,7 @@ public class JsonRepository : IJsonRepository
     /// </summary>
     /// <param name="filePath">JSONファイル</param>
     /// <returns>Classエンティティ</returns>
-    public ClassesEntity CreateClassEntityFromFile(string filePath)
+    private ClassesEntity CreateClassEntityFromFile(string filePath)
     {
         // パラメータチェック
         if(!File.Exists(filePath)) throw new ArgumentException($"{filePath} is not exists");
@@ -136,7 +136,7 @@ public class JsonRepository : IJsonRepository
     /// <param name="json">JSO文字列</param>
     /// <returns>Classエンティティ</returns>
     /// <param name="rootClassName">ルートクラス名</param>
-    public ClassesEntity CreateClassEntityFromString(string json, string rootClassName)
+    private ClassesEntity CreateClassEntityFromString(string json, string rootClassName)
     {
         // パラメータチェック
         if (string.IsNullOrEmpty(json)) throw new ArgumentException($"{nameof(json)} is null");
