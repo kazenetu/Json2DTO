@@ -1,6 +1,5 @@
 using Appplication.Commands;
 using Appplication.Models;
-using Domain.Entities;
 using Domain.Commands;
 using Domain.Interfaces;
 
@@ -46,20 +45,8 @@ public class ClassesApplication : ApplicationBase
         if(JsonRepository is null) throw new NullReferenceException($"{nameof(JsonRepository)} is null");
         if(FileOutputRepository is null) throw new NullReferenceException($"{nameof(FileOutputRepository)} is null");
 
-        var classesEnties = new List<ClassesEntity>();
-
-        // 判定処理
-        if(JsonRepository.IsJsonString(target)){
-            classesEnties.Add(JsonRepository.CreateClassEntityFromString(target, command.RootClassName));
-        }
-        else if(JsonRepository.IsFilePath(target))
-        {
-            classesEnties.Add(JsonRepository.CreateClassEntityFromFile(target));
-        }
-        else
-        {
-            classesEnties.AddRange(JsonRepository.CreateClassEntityFromFiles(target));
-        }
+        // Json取得
+        var classesEnties = JsonRepository.CreateClassEntity(target, command.RootClassName);
 
         // ファイル出力
         var CommandParams = new Dictionary<ParamKeys, string>
