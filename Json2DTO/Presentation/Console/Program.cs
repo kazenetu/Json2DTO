@@ -13,7 +13,7 @@ internal class Program
     private static void Main(string[] args)
     {
         // 入力チェック
-        if(args.Length > 2)
+        if(args.Length < 2)
         {
             System.Console.WriteLine();
             System.Console.Write("Input parameters!");
