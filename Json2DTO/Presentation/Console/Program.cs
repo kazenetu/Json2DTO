@@ -21,6 +21,8 @@ internal class Program
             System.Console.Write("OutputPath ");
             System.Console.Write("\"DirectoryPath/FilePath/JsonString\"");
             System.Console.Write("[NameSpace]");
+            System.Console.Write("[PrefixKeyword]");
+            System.Console.Write("[SuffixKeyword]");
             System.Console.Write("\"");
             System.Console.WriteLine();
             return;
@@ -34,13 +36,23 @@ internal class Program
         var rootPath = args[0];
         var target = args[1];
         var nameSpace = string.Empty;
+        var prefix = string.Empty;
+        var suffix = string.Empty;
         if(args.Length > 2){
             nameSpace = args[2];
+        }
+        if(args.Length > 3){
+            prefix = args[3];
+        }
+        if(args.Length > 4){
+            suffix = args[4];
         }
 
         // HACK 実行処理
         System.Console.WriteLine(rootPath);
         System.Console.WriteLine(target);
         System.Console.WriteLine(nameSpace);
+        System.Console.WriteLine(prefix);
+        System.Console.WriteLine(suffix);
     }
 }
