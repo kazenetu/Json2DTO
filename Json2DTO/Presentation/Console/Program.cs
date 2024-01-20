@@ -12,18 +12,37 @@ internal class Program
     /// </summary>    
     private static void Main(string[] args)
     {
-        // 入力チェック
-        if(args.Length < 2)
+        // パラメータ取得
+        var argManager = new ArgManagers(args);
+
+        // ヘルプモードの確認
+        var isShowHelp = false;
+        if (argManager.GetRequiredArgCount() <= 1)
+        {
+            // パラメータが不正の場合はヘルプモード
+            isShowHelp = true;
+        }
+        if (argManager.ExistsOptionArg(new List<string>() { "--help", "-h" }))
+        {
+            // ヘルプオプションはヘルプモード
+            isShowHelp = true;
+        }
+
+        // ヘルプ画面を表示
+        if (isShowHelp)
         {
             System.Console.WriteLine();
-            System.Console.Write("Input parameters!");
-            System.Console.Write("\"");
-            System.Console.Write("OutputPath ");
-            System.Console.Write("\"DirectoryPath/FilePath/JsonString\"");
-            System.Console.Write("[NameSpace]");
-            System.Console.Write("[PrefixKeyword]");
-            System.Console.Write("[SuffixKeyword]");
-            System.Console.Write("\"");
+            System.Console.WriteLine("how to use: Console <OutputPath> <targetString>  [options]");
+            System.Console.WriteLine("");
+            System.Console.WriteLine("<OutputPath> Generated C# OutputPath");
+            System.Console.WriteLine("<targetString> \"DirectoryPath\" or \"FilePath\" or \"JsonString\"");
+            System.Console.WriteLine("");
+            System.Console.WriteLine("options:");
+            System.Console.WriteLine("-n, --namespace <NameSpace> Input NameSpace");
+            System.Console.WriteLine("-p, --prefix    <Prefix>    Input PrefixKeyword");
+            System.Console.WriteLine("-s, --suffix    <Suffix>    Input SuffixKeyword");
+            System.Console.WriteLine("-r, --rootclass <RootClass> Input RootClass JsonString is (Required JsonString)");
+            System.Console.WriteLine("-h, --help  view this page");
             System.Console.WriteLine();
             return;
         }
@@ -33,26 +52,19 @@ internal class Program
         DIContainer.Add<IJsonRepository, JsonRepository>();
 
         // ファイル出力設定値
-        var rootPath = args[0];
-        var target = args[1];
-        var nameSpace = string.Empty;
-        var prefix = string.Empty;
-        var suffix = string.Empty;
-        if(args.Length > 2){
-            nameSpace = args[2];
-        }
-        if(args.Length > 3){
-            prefix = args[3];
-        }
-        if(args.Length > 4){
-            suffix = args[4];
-        }
+        var rootPath = argManager.GetRequiredArg(0);
+        var target = argManager.GetRequiredArg(1);
+        var nameSpace = argManager.GetOptionArg(new List<string>() { "--namespace", "-n" });
+        var prefix = argManager.GetOptionArg(new List<string>() { "--prefix", "-p" });
+        var suffix = argManager.GetOptionArg(new List<string>() { "--suffix", "-s" });
+        var rootClassName = argManager.GetOptionArg(new List<string>() { "--rootclass", "-r" });
 
         // HACK 実行処理
-        System.Console.WriteLine(rootPath);
-        System.Console.WriteLine(target);
-        System.Console.WriteLine(nameSpace);
-        System.Console.WriteLine(prefix);
-        System.Console.WriteLine(suffix);
+        System.Console.WriteLine($"rootPath:{rootPath}");
+        System.Console.WriteLine($"target:{target}");
+        System.Console.WriteLine($"nameSpace:{nameSpace}");
+        System.Console.WriteLine($"prefix:{prefix}");
+        System.Console.WriteLine($"suffix:{suffix}");
+        System.Console.WriteLine($"rootClassName:{rootClassName}");
     }
 }
