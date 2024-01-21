@@ -8,7 +8,7 @@ public class ArgManagers
     /// <summary>
     /// オプションパラメータ(名前あり)のコレクション
     /// </summary>
-    private Dictionary<string, string> OptionPramArgs = new Dictionary<string, string>();
+    private Dictionary<string, string?> OptionPramArgs = new Dictionary<string, string?>();
 
     /// <summary>
     /// 必須パラメーター(名前なし)のコレクション
@@ -71,7 +71,7 @@ public class ArgManagers
     /// </summary>
     /// <param name="index">取得パラメータのインデックス</param>
     /// <returns>対象パラメータの値(インデックスが存在しない場合はnull)</returns>
-    public string GetRequiredArg(int index)
+    public string? GetRequiredArg(int index)
     {
         if (RequiredPramArgs.Count <= index)
         {
@@ -95,7 +95,7 @@ public class ArgManagers
     /// </summary>
     /// <param name="paramName">パラメータ名</param>
     /// <returns>対象パラメータの値(パラメータ名が存在しない場合はnull)</returns>
-    public string GetOptionArg(string paramName)
+    public string? GetOptionArg(string paramName)
     {
         if (!OptionPramArgs.ContainsKey(paramName))
         {
@@ -110,9 +110,9 @@ public class ArgManagers
     /// </summary>
     /// <param name="paramName">パラメータ名リスト</param>
     /// <returns>対象パラメータの値(パラメータ名が存在しない場合はnull)</returns>
-    public string GetOptionArg(List<string> paramNames)
+    public string? GetOptionArg(List<string> paramNames)
     {
-        string result = null;
+        string? result = null;
         foreach (var pramName in paramNames)
         {
             result = GetOptionArg(pramName);
