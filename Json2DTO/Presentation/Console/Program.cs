@@ -38,10 +38,10 @@ internal class Program
             System.Console.WriteLine("<targetString> \"DirectoryPath\" or \"FilePath\" or \"JsonString\"");
             System.Console.WriteLine("");
             System.Console.WriteLine("options:");
-            System.Console.WriteLine("-n, --namespace <NameSpace> Input NameSpace");
-            System.Console.WriteLine("-p, --prefix    <Prefix>    Input PrefixKeyword");
-            System.Console.WriteLine("-s, --suffix    <Suffix>    Input SuffixKeyword");
-            System.Console.WriteLine("-r, --rootclass <RootClass> Input RootClass JsonString is (Required JsonString)");
+            System.Console.WriteLine("-ns, --namespace <NameSpace> Input NameSpace");
+            System.Console.WriteLine("-pr, --prefix    <Prefix>    Input PrefixKeyword");
+            System.Console.WriteLine("-su, --suffix    <Suffix>    Input SuffixKeyword");
+            System.Console.WriteLine("-rc, --rootclass <RootClass> Input RootClass JsonString (Required JsonString)");
             System.Console.WriteLine("-h, --help  view this page");
             System.Console.WriteLine();
             return;
@@ -54,10 +54,10 @@ internal class Program
         // ファイル出力設定値
         var rootPath = argManager.GetRequiredArg(0);
         var target = argManager.GetRequiredArg(1);
-        var nameSpace = argManager.GetOptionArg(new List<string>() { "--namespace", "-n" });
-        var prefix = argManager.GetOptionArg(new List<string>() { "--prefix", "-p" });
-        var suffix = argManager.GetOptionArg(new List<string>() { "--suffix", "-s" });
-        var rootClassName = argManager.GetOptionArg(new List<string>() { "--rootclass", "-r" });
+        var nameSpace = argManager.GetOptionArg(new List<string>() { "--namespace", "-ns" });
+        var prefix = argManager.GetOptionArg(new List<string>() { "--prefix", "-pr" });
+        var suffix = argManager.GetOptionArg(new List<string>() { "--suffix", "-su" });
+        var rootClassName = argManager.GetOptionArg(new List<string>() { "--rootclass", "-rc" });
 
         // HACK 実行処理
         System.Console.WriteLine($"rootPath:{rootPath}");
