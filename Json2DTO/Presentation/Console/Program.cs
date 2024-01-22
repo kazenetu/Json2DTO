@@ -42,6 +42,7 @@ internal class Program
             System.Console.WriteLine("-pr, --prefix    <Prefix>    Input PrefixKeyword");
             System.Console.WriteLine("-su, --suffix    <Suffix>    Input SuffixKeyword");
             System.Console.WriteLine("-rc, --rootclass <RootClass> Input RootClass JsonString (Required JsonString)");
+            System.Console.WriteLine("-ic, --indentCount <IndentCount> IndentSpaceCount(ex 2 or 4)");
             System.Console.WriteLine("-h, --help  view this page");
             System.Console.WriteLine();
             return;
@@ -58,6 +59,7 @@ internal class Program
         var prefix = argManager.GetOptionArg(new List<string>() { "--prefix", "-pr" });
         var suffix = argManager.GetOptionArg(new List<string>() { "--suffix", "-su" });
         var rootClassName = argManager.GetOptionArg(new List<string>() { "--rootclass", "-rc" });
+        var indentSpaceCount = argManager.GetOptionArg(new List<string>() { "-ic, --indentCount" });
 
         // HACK 実行処理
         System.Console.WriteLine($"rootPath:{rootPath}");
@@ -66,5 +68,6 @@ internal class Program
         System.Console.WriteLine($"prefix:{prefix}");
         System.Console.WriteLine($"suffix:{suffix}");
         System.Console.WriteLine($"rootClassName:{rootClassName}");
+        System.Console.WriteLine($"indentSpaceCount:{indentSpaceCount}");
     }
 }
