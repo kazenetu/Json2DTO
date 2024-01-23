@@ -62,14 +62,12 @@ internal class Program
         var rootClassName = GetOptionArgToString(argManager, new List<string>() { "--rootclass", "-rc" });
         var indentSpaceCount = GetOptionArgToInt(argManager, new List<string>() { "-ic", "--indentCount" }, 4);
 
-        // HACK 実行処理
-        System.Console.WriteLine($"rootPath:{rootPath}");
-        System.Console.WriteLine($"target:{target}");
-        System.Console.WriteLine($"nameSpace:{nameSpace}");
-        System.Console.WriteLine($"prefix:{prefix}");
-        System.Console.WriteLine($"suffix:{suffix}");
-        System.Console.WriteLine($"rootClassName:{rootClassName}");
-        System.Console.WriteLine($"indentSpaceCount:{indentSpaceCount}");
+        // コマンド作成
+        var command = new Appplication.Commands.CSharpCommand(nameSpace, rootPath, rootClassName, indentSpaceCount, prefix, suffix);
+
+        // 実行処理
+        var csApplication = new ClassesApplication();
+        var result = csApplication.ConvertJsonToCSharp(target, command);
     }
 
     /// <summary>
