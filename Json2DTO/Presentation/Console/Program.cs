@@ -55,11 +55,12 @@ internal class Program
         // ファイル出力設定値
         var rootPath = argManager.GetRequiredArg(0);
         var target = argManager.GetRequiredArg(1);
-        var nameSpace = argManager.GetOptionArg(new List<string>() { "--namespace", "-ns" });
-        var prefix = argManager.GetOptionArg(new List<string>() { "--prefix", "-pr" });
-        var suffix = argManager.GetOptionArg(new List<string>() { "--suffix", "-su" });
-        var rootClassName = argManager.GetOptionArg(new List<string>() { "--rootclass", "-rc" });
-        var indentSpaceCount = argManager.GetOptionArg(new List<string>() { "-ic, --indentCount" });
+
+        var nameSpace = GetOptionArgToString(argManager, new List<string>() { "--namespace", "-ns" });
+        var prefix = GetOptionArgToString(argManager, new List<string>() { "--prefix", "-pr" });
+        var suffix = GetOptionArgToString(argManager, new List<string>() { "--suffix", "-su" });
+        var rootClassName = GetOptionArgToString(argManager, new List<string>() { "--rootclass", "-rc" });
+        var indentSpaceCount = GetOptionArgToInt(argManager, new List<string>() { "-ic", "--indentCount" }, 4);
 
         // HACK 実行処理
         System.Console.WriteLine($"rootPath:{rootPath}");
@@ -69,5 +70,40 @@ internal class Program
         System.Console.WriteLine($"suffix:{suffix}");
         System.Console.WriteLine($"rootClassName:{rootClassName}");
         System.Console.WriteLine($"indentSpaceCount:{indentSpaceCount}");
+    }
+
+    /// <summary>
+    /// オプションパラメータの取得:String版
+    /// </summary>
+    /// <param name="argManager">パラメータ管理クラスインスタンス</param>
+    /// <param name="paramName">パラメータ名リスト</param>
+    /// <returns>対象パラメータの値(パラメータ名が存在しない場合はstring.Empty)</returns>
+    private static string GetOptionArgToString(ArgManagers argManager, List<string> paramNames)
+    {
+        var result = argManager.GetOptionArg(paramNames); 
+
+        // 設定値チェック
+        if (result is null) result = string.Empty;
+
+        return result;
+    }
+
+    /// <summary>
+    /// オプションパラメータの取得:int版
+    /// </summary>
+    /// <param name="argManager">パラメータ管理クラスインスタンス</param>
+    /// <param name="paramName">パラメータ名リスト</param>
+    /// <param name="defaultValue">初期値</param>
+    /// <returns>対象パラメータの値(パラメータ名が存在しない場合はdefaultValue)</returns>
+    private static int GetOptionArgToInt(ArgManagers argManager, List<string> paramNames, int defaultValue)
+    {
+        int result = defaultValue;
+        var optionValue = argManager.GetOptionArg(paramNames); 
+
+        // 設定値チェック
+        if (optionValue is null) return defaultValue;
+        if (!int.TryParse(optionValue, out result))  return defaultValue;
+
+        return result;
     }
 }
