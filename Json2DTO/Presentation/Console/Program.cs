@@ -53,8 +53,8 @@ internal class Program
         DIContainer.Add<IJsonRepository, JsonRepository>();
 
         // ファイル出力設定値
-        var rootPath = argManager.GetRequiredArg(0);
-        var target = argManager.GetRequiredArg(1);
+        var rootPath = GetRequiredArg(argManager, 0);
+        var target = GetRequiredArg(argManager, 1);
 
         var nameSpace = GetOptionArgToString(argManager, new List<string>() { "--namespace", "-ns" });
         var prefix = GetOptionArgToString(argManager, new List<string>() { "--prefix", "-pr" });
@@ -68,6 +68,22 @@ internal class Program
         // 実行処理
         var csApplication = new ClassesApplication();
         var result = csApplication.ConvertJsonToCSharp(target, command);
+    }
+
+    /// <summary>
+    /// 必須パラメータの取得
+    /// </summary>
+    /// <param name="argManager">パラメータ管理クラスインスタンス</param>
+    /// <param name="index">パラメータインデックス</param>
+    /// <returns>対象パラメータの値(パラメータ名が存在しない場合はstring.Empty)</returns>
+    private static string GetRequiredArg(ArgManagers argManager, int index)
+    {
+        var result = argManager.GetRequiredArg(index); 
+
+        // 設定値チェック
+        if (result is null) result = string.Empty;
+
+        return result;
     }
 
     /// <summary>
