@@ -67,7 +67,15 @@ internal class Program
 
         // 実行処理
         var csApplication = new ClassesApplication();
-        var result = csApplication.ConvertJsonToCSharp(target, command);
+        var results = csApplication.ConvertJsonToCSharp(target, command);
+
+        // 出力結果をコンソール出力
+        foreach(var result in results)
+        {
+            System.Console.Write($"{result.FileName}...");
+            if (result.Success) System.Console.WriteLine($"Success");
+            else System.Console.WriteLine($"Error");
+        }
     }
 
     /// <summary>
