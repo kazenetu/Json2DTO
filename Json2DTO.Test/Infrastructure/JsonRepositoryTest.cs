@@ -160,6 +160,35 @@ public class JsonRepositoryTest: IDisposable
     }
 
     [Fact]
+    public void SuccessIsJsonString_JsonString()
+    {
+        var target = @"{
+            ""prop_string"" : ""string""
+        }";
+
+        var repository = new JsonRepository();
+        Assert.Equal(true, repository.IsJsonString(target));
+    }
+
+    [Fact]
+    public void SuccessIsJsonString_File()
+    {
+        var target = "file.json";
+
+        var repository = new JsonRepository();
+        Assert.Equal(false,repository.IsJsonString(target));
+    }
+
+    [Fact]
+    public void SuccessIsJsonString_Directory()
+    {
+        var target = "files";
+
+        var repository = new JsonRepository();
+        Assert.Equal(false, repository.IsJsonString(target));
+    }
+
+    [Fact]
     public void SuccessJsonString()
     {
         var json = @"{

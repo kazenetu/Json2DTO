@@ -26,6 +26,16 @@ public class JsonRepository : IJsonRepository
     };
 
     /// <summary>
+    /// Json文字列か否か
+    /// </summary>
+    /// <param name="target">確認対象文字列</param>
+    /// <returns>Json文字列/以外</returns>
+    public bool IsJsonString(string target)
+    {
+        return target.Contains('{');
+    }
+
+    /// <summary>
     /// Json文字列/ファイルパス/ディレクトリパスを読み込んで Classエンティティリストを返す
     /// </summary>
     /// <param name="target">対象文字列(Json文字列/ファイルパス/ディレクトリパス)</param>
@@ -56,16 +66,6 @@ public class JsonRepository : IJsonRepository
         }
 
         return classesEnties;
-    }
-
-    /// <summary>
-    /// Json文字列か否か
-    /// </summary>
-    /// <param name="target">確認対象文字列</param>
-    /// <returns>Json文字列/以外</returns>
-    private bool IsJsonString(string target)
-    {
-        return target.Contains('{');
     }
 
     /// <summary>
