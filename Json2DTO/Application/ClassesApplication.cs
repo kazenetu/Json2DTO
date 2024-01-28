@@ -36,14 +36,14 @@ public class ClassesApplication : ApplicationBase
     /// <returns>処理結果</returns>
     public IReadOnlyList<ConvertResultModel> ConvertJsonToCSharp(string target, CSharpCommand command)
     {
-        // パラメータチェック
-        if (string.IsNullOrEmpty(target)) throw new ArgumentException($"{nameof(target)} is null or Empty");
-        if (command is null) throw new ArgumentException($"{nameof(command)} is null");
-        if (string.IsNullOrEmpty(command?.RootClassName)) throw new ArgumentException($"{nameof(command.RootClassName)} is null");
-
         // リポジトリ設定チェック
         if(JsonRepository is null) throw new NullReferenceException($"{nameof(JsonRepository)} is null");
         if(FileOutputRepository is null) throw new NullReferenceException($"{nameof(FileOutputRepository)} is null");
+
+        // パラメータチェック
+        if (string.IsNullOrEmpty(target)) throw new ArgumentException($"{nameof(target)} is null or Empty");
+        if (command is null) throw new ArgumentException($"{nameof(command)} is null");
+        if (JsonRepository.IsJsonString(target) && string.IsNullOrEmpty(command?.RootClassName)) throw new ArgumentException($"{nameof(command.RootClassName)} is null");
 
         // Json取得
         var classesEnties = JsonRepository.CreateClassEntity(target, command.RootClassName);
