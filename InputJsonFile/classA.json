@@ -1,0 +1,9 @@
+{
+    "prop_string" : "string"
+    , "propNumber":10
+    , "prop_Date":"2022/01/01 10:11:12"
+    , "PropTrue":true
+    , "propFalse":false
+    , "propNull":null
+    , "propArray":[1,2,3]
+}
