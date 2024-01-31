@@ -261,7 +261,7 @@ namespace Test
 
         string nameSpace = "Test";
         string rootPath = "testApplication";
-        string rootClassName = "rootClassName";
+        string rootClassName = string.Empty;
         int indentSpaceCount = 2;
         string prefix = "prefix";
         string suffix = "suffix";
@@ -304,7 +304,7 @@ namespace Test
 
         string nameSpace = "Test";
         string rootPath = "testApplication";
-        string rootClassName = "rootClassName";
+        string rootClassName = string.Empty;
         int indentSpaceCount = 2;
         string prefix = "prefix";
         string suffix = "suffix";
@@ -334,7 +334,7 @@ namespace Test
 
         string nameSpace = "Test";
         string rootPath = "testApplication";
-        string rootClassName = "rootClassName";
+        string rootClassName = string.Empty;
         int indentSpaceCount = 2;
         string prefix = "prefix";
         string suffix = "suffix";
@@ -394,7 +394,7 @@ namespace Test
 
         string nameSpace = "Test";
         string rootPath = "testApplication";
-        string rootClassName = "rootClassName";
+        string rootClassName = string.Empty;
         int indentSpaceCount = 2;
         string prefix = "prefix";
         string suffix = "suffix";
