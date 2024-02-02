@@ -13,17 +13,17 @@ public class JsonRepositoryTest: IDisposable
     /// <summary>
     /// 生成したファイルを格納したディレクトリパス
     /// </summary>
-    private string CreatedDirectoryPath = "fromFiles";
+    private string _createdDirectoryPath = "fromFiles";
 
     /// <summary>
     /// Teardown
     /// </summary>
     public void Dispose()
     {
-        if(!Directory.Exists(CreatedDirectoryPath)) return;
+        if(!Directory.Exists(_createdDirectoryPath)) return;
 
         // ファイル削除
-        var files = Directory.GetFiles(CreatedDirectoryPath);
+        var files = Directory.GetFiles(_createdDirectoryPath);
         foreach (var file in files)
         {
             File.Delete(file);
@@ -39,11 +39,11 @@ public class JsonRepositoryTest: IDisposable
     private string CreateFile(string json, string fileName)
     {
         // フォルダの確認と生成
-        if(!Directory.Exists(CreatedDirectoryPath))
+        if(!Directory.Exists(_createdDirectoryPath))
         {
-            Directory.CreateDirectory(CreatedDirectoryPath);
+            Directory.CreateDirectory(_createdDirectoryPath);
         }
-        var filePath = Path.Combine(CreatedDirectoryPath, fileName);
+        var filePath = Path.Combine(_createdDirectoryPath, fileName);
 
         // ファイル出力
         File.WriteAllText(filePath, json);
@@ -730,11 +730,11 @@ public class JsonRepositoryTest: IDisposable
     [Fact]
     public void ExceptionDirectoryNotExistsFiles()
     {
-        Directory.CreateDirectory(CreatedDirectoryPath);
+        Directory.CreateDirectory(_createdDirectoryPath);
 
         var repository = new JsonRepository();
-        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntity(CreatedDirectoryPath));
-        Assert.Equal($"{CreatedDirectoryPath} is not file", ex.Message);
+        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntity(_createdDirectoryPath));
+        Assert.Equal($"{_createdDirectoryPath} is not file", ex.Message);
     }
 
     [Fact]
@@ -745,7 +745,7 @@ public class JsonRepositoryTest: IDisposable
         CreateFile(json, $"{rootClassName}.json");
 
         var repository = new JsonRepository();
-        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntity(CreatedDirectoryPath));
+        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntity(_createdDirectoryPath));
         Assert.Equal($"JSON parse error:{json}", ex.Message);
     }
 
@@ -758,7 +758,7 @@ public class JsonRepositoryTest: IDisposable
         CreateFile(json, $"{rootClassName}.json");
 
         var repository = new JsonRepository();
-        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntity(CreatedDirectoryPath));
+        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntity(_createdDirectoryPath));
         Assert.Equal($"JSON elements none:{json}", ex.Message);
     }
 
@@ -776,7 +776,7 @@ public class JsonRepositoryTest: IDisposable
         CreateFile(json, $"{rootClassName}.json");
 
         var repository = new JsonRepository();
-        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntity(CreatedDirectoryPath));
+        var ex = Assert.ThrowsAny<ArgumentException>(() => repository.CreateClassEntity(_createdDirectoryPath));
         var errorJson = "{}";
         Assert.Equal($"JSON elements none:{errorJson}", ex.Message);
     }
@@ -791,7 +791,7 @@ public class JsonRepositoryTest: IDisposable
         CreateFile(json, $"{rootClassName}.json");
 
         var repository = new JsonRepository();
-        var classesEntities = repository.CreateClassEntity(CreatedDirectoryPath);
+        var classesEntities = repository.CreateClassEntity(_createdDirectoryPath);
         Assert.Equal(1, classesEntities.Count);
 
         var rootClass = classesEntities[0].RootClass;
@@ -822,7 +822,7 @@ public class JsonRepositoryTest: IDisposable
         CreateFile(json2, $"{rootClassName2}.json");
 
         var repository = new JsonRepository();
-        var classesEntities = repository.CreateClassEntity(CreatedDirectoryPath);
+        var classesEntities = repository.CreateClassEntity(_createdDirectoryPath);
         Assert.Equal(2, classesEntities.Count);
 
         var sortedClassesEntities = classesEntities.OrderBy(classes => classes.RootClass.Name).ToList();

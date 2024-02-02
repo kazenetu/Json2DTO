@@ -13,17 +13,17 @@ public class FileOutputRepositoryTest: IDisposable
     /// <summary>
     /// 出力ファイルを格納したディレクトリパス
     /// </summary>
-    private string CreatedDirectoryPath = "outputFiles";
+    private string _createdDirectoryPath = "outputFiles";
 
     /// <summary>
     /// Teardown
     /// </summary>
     public void Dispose()
     {
-        if(!Directory.Exists(CreatedDirectoryPath)) return;
+        if(!Directory.Exists(_createdDirectoryPath)) return;
 
         // ファイル削除
-        var files = Directory.GetFiles(CreatedDirectoryPath);
+        var files = Directory.GetFiles(_createdDirectoryPath);
         foreach (var file in files)
         {
             File.Delete(file);
@@ -55,7 +55,7 @@ public class FileOutputRepositoryTest: IDisposable
         };
 
         var command = 
-            new FileOutputCommand(CreatedDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
+            new FileOutputCommand(_createdDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
 
         var repository = new FileOutputRepository();
         #pragma warning disable
@@ -81,7 +81,7 @@ public class FileOutputRepositoryTest: IDisposable
         };
 
         var command = 
-            new FileOutputCommand(CreatedDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
+            new FileOutputCommand(_createdDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
 
         var repository = new FileOutputRepository();
         #pragma warning disable
@@ -140,7 +140,7 @@ public class FileOutputRepositoryTest: IDisposable
         Dictionary<ParamKeys, string>? commandParams = null;
 
         var command = 
-            new FileOutputCommand(CreatedDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
+            new FileOutputCommand(_createdDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
 
         var repository = new FileOutputRepository();
         #pragma warning disable
@@ -199,14 +199,14 @@ public class FileOutputRepositoryTest: IDisposable
         };
 
         var command = 
-            new FileOutputCommand(CreatedDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
+            new FileOutputCommand(_createdDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
 
         var repository = new FileOutputRepository();
         var result  = repository.OutputResult(classInstance, command);
 
         Assert.Equal(true, result.Success);
 
-        var expectedFileName = Path.Combine(CreatedDirectoryPath, "PrefixTestRootClassSuffix.cs");
+        var expectedFileName = Path.Combine(_createdDirectoryPath, "PrefixTestRootClassSuffix.cs");
         Assert.Equal(expectedFileName, result.FileName);
 
         var expectedSourceCode = 
@@ -250,14 +250,14 @@ namespace Test
         var commandParams = new Dictionary<ParamKeys, string>();
 
         var command = 
-            new FileOutputCommand(CreatedDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
+            new FileOutputCommand(_createdDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
 
         var repository = new FileOutputRepository();
         var result  = repository.OutputResult(classInstance, command);
 
         Assert.Equal(true, result.Success);
 
-        var expectedFileName = Path.Combine(CreatedDirectoryPath, "TestClass.cs");
+        var expectedFileName = Path.Combine(_createdDirectoryPath, "TestClass.cs");
         Assert.Equal(expectedFileName, result.FileName);
 
         var expectedSourceCode = 
@@ -307,7 +307,7 @@ public class TestClass
         };
 
         var command = 
-            new FileOutputCommand(CreatedDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
+            new FileOutputCommand(_createdDirectoryPath, OutputLanguageType.CS, indentSpace, commandParams);
 
         var repository = new FileOutputRepository();
         var results  = repository.OutputResults(classInstances, command);
@@ -347,7 +347,7 @@ namespace Test
         {
             Assert.Equal(true, result.Success);
             
-            var expectedFileName = Path.Combine(CreatedDirectoryPath, $"{expectedFileNames[index]}.cs");
+            var expectedFileName = Path.Combine(_createdDirectoryPath, $"{expectedFileNames[index]}.cs");
             Assert.Equal(expectedFileName, result.FileName);
 
             Assert.Equal(expectedSourceCodes[index], result.SourceCode);
