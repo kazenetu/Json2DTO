@@ -14,7 +14,7 @@ public static class ClassesApplicationExtensions
     /// <param name="application">ClassesApplicationインスタンス</param>
     public static void ClearJsonRepository(this ClassesApplication application) 
     {
-        var targetName = "JsonRepository";
+        var targetName = "_jsonRepository";
 
         // フィールドを検索
         var filelds = application.GetType().GetFields(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
@@ -37,7 +37,7 @@ public static class ClassesApplicationExtensions
     /// <param name="application">ClassesApplicationインスタンス</param>
     public static void ClearFileOutputRepository(this ClassesApplication application) 
     {
-        var targetName = "FileOutputRepository";
+        var targetName = "_fileOutputRepository";
 
         // フィールドを検索
         var filelds = application.GetType().GetFields(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);

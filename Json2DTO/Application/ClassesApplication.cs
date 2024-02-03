@@ -13,12 +13,12 @@ public class ClassesApplication : ApplicationBase
     /// <summary>
     /// Json解析リポジトリクラスインスタンス
     /// </summary>
-    private IJsonRepository? JsonRepository = null;
+    private IJsonRepository? _jsonRepository = null;
 
     /// <summary>
     /// ファイル出力リポジトリクラスインスタンス
     /// </summary>
-    private IFileOutputRepository? FileOutputRepository = null;
+    private IFileOutputRepository? _fileOutputRepository = null;
 
     /// <summary>
     /// コンストラクタ
@@ -37,16 +37,16 @@ public class ClassesApplication : ApplicationBase
     public IReadOnlyList<ConvertResultModel> ConvertJsonToCSharp(string target, CSharpCommand command)
     {
         // リポジトリ設定チェック
-        if(JsonRepository is null) throw new NullReferenceException($"{nameof(JsonRepository)} is null");
-        if(FileOutputRepository is null) throw new NullReferenceException($"{nameof(FileOutputRepository)} is null");
+        if(_jsonRepository is null) throw new NullReferenceException($"{nameof(_jsonRepository)} is null");
+        if(_fileOutputRepository is null) throw new NullReferenceException($"{nameof(_fileOutputRepository)} is null");
 
         // パラメータチェック
         if (string.IsNullOrEmpty(target)) throw new ArgumentException($"{nameof(target)} is null or Empty");
         if (command is null) throw new ArgumentException($"{nameof(command)} is null");
-        if (JsonRepository.IsJsonString(target) && string.IsNullOrEmpty(command?.RootClassName)) throw new ArgumentException($"{nameof(command.RootClassName)} is null");
+        if (_jsonRepository.IsJsonString(target) && string.IsNullOrEmpty(command?.RootClassName)) throw new ArgumentException($"{nameof(command.RootClassName)} is null");
 
         // Json取得
-        var classesEnties = JsonRepository.CreateClassEntity(target, command.RootClassName);
+        var classesEnties = _jsonRepository.CreateClassEntity(target, command.RootClassName);
 
         // ファイル出力
         var CommandParams = new Dictionary<ParamKeys, string>
@@ -56,7 +56,7 @@ public class ClassesApplication : ApplicationBase
             {ParamKeys.Suffix, command.Suffix},
         };
         var fileCommand = new FileOutputCommand(command.RootPath, OutputLanguageType.CS, command.IndentSpaceCount, CommandParams);
-        var results = FileOutputRepository.OutputResults(classesEnties, fileCommand);
+        var results = _fileOutputRepository.OutputResults(classesEnties, fileCommand);
 
         var resultModels = new List<ConvertResultModel>();
         foreach (var result in results)

@@ -148,7 +148,7 @@ public class ClassesApplicationTest
 
         #pragma warning disable
         var ex = Assert.ThrowsAny<NullReferenceException>(() => csApplication.ConvertJsonToCSharp(json, command));
-        Assert.Equal("JsonRepository is null", ex.Message);
+        Assert.Equal("_jsonRepository is null", ex.Message);
     }
 
     [Fact]
@@ -174,7 +174,7 @@ public class ClassesApplicationTest
 
         #pragma warning disable
         var ex = Assert.ThrowsAny<NullReferenceException>(() => csApplication.ConvertJsonToCSharp(json, command));
-        Assert.Equal("FileOutputRepository is null", ex.Message);
+        Assert.Equal("_fileOutputRepository is null", ex.Message);
     }
 
     [Fact]
