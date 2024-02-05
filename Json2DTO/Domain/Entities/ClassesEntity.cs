@@ -11,7 +11,7 @@ public class ClassesEntity
     /// 非公開インナークラスリスト
     /// </summary>
     /// <returns>非公開インナークラスリスト</returns>
-    private List<ClassEntity> innerClasses = new();
+    private List<ClassEntity> _innerClasses = new();
 
     /// <summary>
     /// 読み取り用インナークラスリスト
@@ -19,7 +19,7 @@ public class ClassesEntity
     /// <returns>読み取り用インナークラスリスト</returns>
     public IReadOnlyList<ClassEntity> InnerClasses
     {
-        get => innerClasses;
+        get => _innerClasses;
     }
 
     /// <summary>
@@ -81,7 +81,7 @@ public class ClassesEntity
         if (innerClass is null) throw new ArgumentException($"{nameof(innerClass)} is null");
 
         // インナークラスリストに追加
-        innerClasses.Add(innerClass!);
+        _innerClasses.Add(innerClass!);
     }
 
     /// <summary>
