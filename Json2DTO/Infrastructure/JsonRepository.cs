@@ -14,7 +14,7 @@ public class JsonRepository : IJsonRepository
     /// Jsonプロパティリスト
     /// </summary>
     /// <typeparam name="IJsonProperty">Jsonプロパティインターフェイス</typeparam>
-    private static readonly IReadOnlyList<IJsonProperty> JsonProperties = new List<IJsonProperty>()
+    private static readonly IReadOnlyList<IJsonProperty> s_jsonProperties = new List<IJsonProperty>()
     {
         new JsonPropertyObject(),
         new JsonPropertyArray(),
@@ -203,7 +203,7 @@ public class JsonRepository : IJsonRepository
         // JSON文字列解析・変換
         foreach (var element in elements)
         {
-            var jsonProperty = JsonProperties.Where(item => item.GetKeyName() == element.Value.ValueKind).FirstOrDefault();
+            var jsonProperty = s_jsonProperties.Where(item => item.GetKeyName() == element.Value.ValueKind).FirstOrDefault();
             if (jsonProperty is null) throw new Exception($"{element.Value.ValueKind} is can not use");
 
             // プロパティ追加
