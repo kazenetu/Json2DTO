@@ -8,12 +8,12 @@ public class ArgManagers
     /// <summary>
     /// オプションパラメータ(名前あり)のコレクション
     /// </summary>
-    private Dictionary<string, string?> OptionPramArgs = new Dictionary<string, string?>();
+    private Dictionary<string, string?> _optionPramArgs = new Dictionary<string, string?>();
 
     /// <summary>
     /// 必須パラメーター(名前なし)のコレクション
     /// </summary>
-    private List<string> RequiredPramArgs = new List<string>();
+    private List<string> _requiredPramArgs = new List<string>();
 
     /// <summary>
     /// コンストラクタ
@@ -32,7 +32,7 @@ public class ArgManagers
                     if (!string.IsNullOrEmpty(paramName))
                     {
                         // パラメータ名だけの場合はパラメータ名だけ追加
-                        OptionPramArgs.Add(paramName, null);
+                        _optionPramArgs.Add(paramName, null);
                     }
 
                     // パラメータ名を設定
@@ -45,12 +45,12 @@ public class ArgManagers
                     if (string.IsNullOrEmpty(paramName))
                     {
                         // パラメータ名なし
-                        RequiredPramArgs.Add(arg);
+                        _requiredPramArgs.Add(arg);
                     }
                     else
                     {
                         // パラメータ名あり
-                        OptionPramArgs.Add(paramName, arg);
+                        _optionPramArgs.Add(paramName, arg);
                     }
 
                     // パラメータ名をクリア
@@ -62,7 +62,7 @@ public class ArgManagers
         // パラメータ名だけの場合はパラメータ名だけ追加
         if (!string.IsNullOrEmpty(paramName))
         {
-            OptionPramArgs.Add(paramName, null);
+            _optionPramArgs.Add(paramName, null);
         }
     }
 
@@ -73,12 +73,12 @@ public class ArgManagers
     /// <returns>対象パラメータの値(インデックスが存在しない場合はnull)</returns>
     public string? GetRequiredArg(int index)
     {
-        if (RequiredPramArgs.Count <= index)
+        if (_requiredPramArgs.Count <= index)
         {
             return null;
         }
 
-        return RequiredPramArgs[index];
+        return _requiredPramArgs[index];
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ public class ArgManagers
     /// <returns>必須パラメータ数</returns>
     public int GetRequiredArgCount()
     {
-        return RequiredPramArgs.Count;
+        return _requiredPramArgs.Count;
     }
 
     /// <summary>
@@ -97,12 +97,12 @@ public class ArgManagers
     /// <returns>対象パラメータの値(パラメータ名が存在しない場合はnull)</returns>
     public string? GetOptionArg(string paramName)
     {
-        if (!OptionPramArgs.ContainsKey(paramName))
+        if (!_optionPramArgs.ContainsKey(paramName))
         {
             return null;
         }
 
-        return OptionPramArgs[paramName];
+        return _optionPramArgs[paramName];
     }
 
     /// <summary>
@@ -131,7 +131,7 @@ public class ArgManagers
     /// <returns>確認結果</returns>
     public bool ExistsOptionArg(string paramName)
     {
-        return OptionPramArgs.ContainsKey(paramName);
+        return _optionPramArgs.ContainsKey(paramName);
     }
 
     /// <summary>

@@ -12,7 +12,7 @@ namespace TinyDIContainer
     /// <summary>
     /// コンテナ本体
     /// </summary>
-    private static readonly Dictionary<string, Type> Dict = new Dictionary<string, Type>();
+    private static readonly Dictionary<string, Type> _dict = new Dictionary<string, Type>();
 
     /// <summary>
     /// 追加
@@ -27,7 +27,7 @@ namespace TinyDIContainer
       var interfaceType = typeof(U);
       if (classType.IsClass && classType.GetInterfaces().Contains(interfaceType))
       {
-        Dict.Add(interfaceType.FullName, classType);
+        _dict.Add(interfaceType.FullName, classType);
         return;
       }
       throw new Exception($"{interfaceType.Name},{classType.Name} Is Combination error");
@@ -42,9 +42,9 @@ namespace TinyDIContainer
       where U : class
     {
       var keyName = typeof(U).FullName;
-      if (Dict.ContainsKey(keyName))
+      if (_dict.ContainsKey(keyName))
       {
-        var classType = Dict[keyName];
+        var classType = _dict[keyName];
         return Activator.CreateInstance(classType) as U;
       }
       throw new Exception($"{typeof(U).Name} Is Not Exists");
@@ -58,9 +58,9 @@ namespace TinyDIContainer
     public static object CreateInstance(Type interfaceType)
     {
       var keyName = interfaceType.FullName;
-      if (Dict.ContainsKey(keyName))
+      if (_dict.ContainsKey(keyName))
       {
-        var classType = Dict[keyName];
+        var classType = _dict[keyName];
         return Activator.CreateInstance(classType);
       }
       throw new Exception($"{interfaceType.Name} Is Not Exists");

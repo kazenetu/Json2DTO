@@ -14,32 +14,32 @@ public class CSConverter : IConverter
     /// <summary>
     /// 集合クラスインスタンス フィールド
     /// </summary>
-    private readonly ClassesEntity ClassInstance;
+    private readonly ClassesEntity _classInstance;
 
     /// <summary>
     /// パラメータ フィールド
     /// </summary>
-    private readonly Dictionary<ParamKeys, string> Params;
+    private readonly Dictionary<ParamKeys, string> _params;
 
     /// <summary>
     /// ルートクラスインスタンス フィールド
     /// </summary>
-    private readonly ClassEntity RootClass;
+    private readonly ClassEntity _rootClass;
 
     /// <summary>
     /// インデントのスペース数
     /// </summary>
-    private int IndentSpaceCount = 2;
+    private int _indentSpaceCount = 2;
 
     /// <summary>
     /// 固定プレフィックス
     /// </summary>
-    private readonly string Prefix = string.Empty;
+    private readonly string _prefix = string.Empty;
 
     /// <summary>
     /// 固定サフィックス
     /// </summary>
-    private readonly string Suffix = string.Empty;
+    private readonly string _suffix = string.Empty;
 
     /// <summary>
     /// コンストラクタ
@@ -49,23 +49,23 @@ public class CSConverter : IConverter
     /// <returns>インスタンス<returns>
     public CSConverter(ClassesEntity classInstance, Dictionary<ParamKeys, string> param)
     {
-        ClassInstance = classInstance;
-        Params = param;
+        _classInstance = classInstance;
+        _params = param;
 
         // インデントパラメータを設定
-        if (Params.ContainsKey(ParamKeys.IndentSpaceCount))
-            IndentSpaceCount = int.Parse(Params[ParamKeys.IndentSpaceCount]);
+        if (_params.ContainsKey(ParamKeys.IndentSpaceCount))
+            _indentSpaceCount = int.Parse(_params[ParamKeys.IndentSpaceCount]);
 
         // 固定プレフィックスを設定
-        if (Params.ContainsKey(ParamKeys.Prefix))
-            Prefix = Params[ParamKeys.Prefix];
+        if (_params.ContainsKey(ParamKeys.Prefix))
+            _prefix = _params[ParamKeys.Prefix];
 
         // 固定サフィックスを設定
-        if (Params.ContainsKey(ParamKeys.Suffix))
-            Suffix = Params[ParamKeys.Suffix];
+        if (_params.ContainsKey(ParamKeys.Suffix))
+            _suffix = _params[ParamKeys.Suffix];
 
         // Rootを取得
-        RootClass = ClassInstance.RootClass;
+        _rootClass = _classInstance.RootClass;
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public class CSConverter : IConverter
 
         // 名前空間取得
         var namespaceName = string.Empty;
-        if (Params.ContainsKey(ParamKeys.CS_NameSpace)) namespaceName = Params[ParamKeys.CS_NameSpace];
+        if (_params.ContainsKey(ParamKeys.CS_NameSpace)) namespaceName = _params[ParamKeys.CS_NameSpace];
 
         // インデントレベル
         var indentLevel = 0;
@@ -125,7 +125,7 @@ public class CSConverter : IConverter
     string GetRootClassString(int indentLevel = 0)
     {
         // ルートクラスを出力
-        return GetClassString(RootClass, indentLevel);
+        return GetClassString(_rootClass, indentLevel);
     }
 
     /// <summary>
@@ -139,14 +139,14 @@ public class CSConverter : IConverter
         var result = new StringBuilder();
 
         // インデント設定
-        var levelSpace = new string('S', indentLevel * IndentSpaceCount).Replace("S", " ");
-        result.AppendLine($"{levelSpace}public class {Prefix}{classEntity.Name}{Suffix}");
+        var levelSpace = new string('S', indentLevel * _indentSpaceCount).Replace("S", " ");
+        result.AppendLine($"{levelSpace}public class {_prefix}{classEntity.Name}{_suffix}");
         result.AppendLine($"{levelSpace}{{");
 
-        if (classEntity == RootClass)
+        if (classEntity == _rootClass)
         {
             // インナークラスのクラス文字列作成
-            foreach (var classInstance in ClassInstance.InnerClasses)
+            foreach (var classInstance in _classInstance.InnerClasses)
             {
                 result.AppendLine($"{GetClassString(classInstance, indentLevel + 1)}");
             }
@@ -177,7 +177,7 @@ public class CSConverter : IConverter
         var result = new StringBuilder();
 
         // インデント設定
-        var levelSpace = new string('S', indentLevel * IndentSpaceCount).Replace("S", " ");
+        var levelSpace = new string('S', indentLevel * _indentSpaceCount).Replace("S", " ");
 
         // プロパティ文字列作成
         var (proptyBase, attribute) = GetPropertyBaseString(property);
@@ -204,8 +204,8 @@ public class CSConverter : IConverter
             { Kind: PropertyType.Kinds.Decimal } => "decimal",
             { Kind: PropertyType.Kinds.Bool } => "bool",
             { Kind: PropertyType.Kinds.Null } => "object",
-            { Kind: PropertyType.Kinds.Class, IsList: true } => $"{Prefix}{property.PropertyTypeClassName}{Suffix}",
-            { Kind: PropertyType.Kinds.Class, IsList: false } => $"{Prefix}{property.PropertyTypeClassName}{Suffix}?",
+            { Kind: PropertyType.Kinds.Class, IsList: true } => $"{_prefix}{property.PropertyTypeClassName}{_suffix}",
+            { Kind: PropertyType.Kinds.Class, IsList: false } => $"{_prefix}{property.PropertyTypeClassName}{_suffix}?",
             _ => throw new Exception($"{nameof(property)} has no type set"),
         };
 

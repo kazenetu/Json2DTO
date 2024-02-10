@@ -26,7 +26,7 @@ public record PropertyType : BasePropertyType
     /// <summary>
     /// C#Typeと値種別のリスト
     /// </summary>
-    private static readonly List<(Type type, Kinds kind)> TypeKinds = new()
+    private static readonly List<(Type type, Kinds kind)> s_typeKinds = new()
     {
         (typeof(string), Kinds.String),
         (typeof(decimal), Kinds.Decimal),
@@ -54,7 +54,7 @@ public record PropertyType : BasePropertyType
     public PropertyType(Type type, bool isList) : base(isList)
     {
         // 対象抽出
-        var target = TypeKinds.Where(item => item.type == type);
+        var target = s_typeKinds.Where(item => item.type == type);
 
         // パラメータチェック
         if (!target.Any()) throw new ArgumentException($"{nameof(type)}({type.Name}) is null");
