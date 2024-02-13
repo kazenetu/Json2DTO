@@ -22,10 +22,7 @@ public class FileOutputRepository : IFileOutputRepository
         var result = new List<FileOutputResult>();
 
         //必須パラメータチェック
-        var isSuccess = true;
-        if (classInstances is null) isSuccess = false;
-        if (classInstances?.Count <= 0) isSuccess = false;
-        if(!isSuccess)
+        if(classInstances is null || classInstances.Count <= 0)
         {
             result.Add(new FileOutputResult(false, string.Empty, string.Empty));
             return result;
