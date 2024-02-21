@@ -199,3 +199,20 @@
 
 * Json2DTO.Test  
   テスト
+  * Appplication
+    * Extensions
+      * ClassesApplicationExtensions.cs  
+        ClassesApplicationテスト用拡張メソッド  
+        例外テストのためにリポジトリインターフェイスをnullに設定する
+    * Stub
+      * FileOutputRepositoryStub.cs  
+        ファイル出力リポジトリクラスのスタブ
+      * JsonRepositoryStub.cs  
+        JSON読み込みリポジトリのスタブ
+    * ClassesApplicationTest.cs  
+      アプリケーション層のテスト
+
+  * Domain  
+
+  * Infrastructure  
+
