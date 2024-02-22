@@ -213,6 +213,23 @@
       アプリケーション層のテスト
 
   * Domain  
+    * Entities  
+      エンティティクラスのテスト
+      * ClassEntityTest.cs
+      * ClassesEntityTest.cs
+    * ValueObjects  
+      値オブジェクトのテスト
+      * PropertyTypeTest.cs
+      * PropertyValueObjectTest.cs
 
   * Infrastructure  
+    リポジトリのテスト
+    * FileOutputRepositoryTest.cs
+    * JsonRepositoryTest.cs
+
+  * Usings.cs  
+    テスト全体で使用するusing定義
+
+  * Json2DTO.Test.csproj  
+    テストプロジェクト
 
