@@ -33,19 +33,6 @@ public class ClassEntity
     }
 
     /// <summary>
-    /// プロパティ追加
-    /// </summary>
-    /// <param name="property">追加対象</param>
-    public void AddProperty(PropertyValueObject property)
-    {
-        // 入力チェック
-        if (property is null) throw new ArgumentException($"{nameof(property)} is null");
-
-        // プロパティリスト追加
-        _propertyies.Add(property);
-    }
-
-    /// <summary>
     /// インスタンス生成
     /// </summary>
     /// <param name="className">クラス名</param>
@@ -60,5 +47,18 @@ public class ClassEntity
         {
             Name = className
         };
+    }
+
+    /// <summary>
+    /// プロパティ追加
+    /// </summary>
+    /// <param name="property">追加対象</param>
+    public void AddProperty(PropertyValueObject property)
+    {
+        // 入力チェック
+        if (property is null) throw new ArgumentException($"{nameof(property)} is null");
+
+        // プロパティリスト追加
+        _propertyies.Add(property);
     }
 }
