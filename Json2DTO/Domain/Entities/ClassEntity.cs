@@ -20,17 +20,17 @@ public class ClassEntity
     public IReadOnlyList<PropertyValueObject> Properties { get { return _propertyies; } }
 
     /// <summary>
+    /// 非公開プロパティリスト
+    /// </summary>
+    /// <returns>非公開プロパティリスト</returns>
+    private List<PropertyValueObject> _propertyies = new();
+
+    /// <summary>
     /// 非公開コンストラクタ
     /// </summary>
     private ClassEntity()
     {
     }
-
-    /// <summary>
-    /// 非公開プロパティリスト
-    /// </summary>
-    /// <returns>非公開プロパティリスト</returns>
-    private List<PropertyValueObject> _propertyies = new();
 
     /// <summary>
     /// プロパティ追加
