@@ -8,12 +8,6 @@ namespace Domain.Entities;
 public class ClassesEntity
 {
     /// <summary>
-    /// 非公開インナークラスリスト
-    /// </summary>
-    /// <returns>非公開インナークラスリスト</returns>
-    private List<ClassEntity> _innerClasses = new();
-
-    /// <summary>
     /// 読み取り用インナークラスリスト
     /// </summary>
     /// <returns>読み取り用インナークラスリスト</returns>
@@ -21,12 +15,6 @@ public class ClassesEntity
     {
         get => _innerClasses;
     }
-
-    /// <summary>
-    /// ルートクラス
-    /// </summary>
-    /// <returns>ルートクラス</returns>
-    private ClassEntity? rootClass = null;
 
     /// <summary>
     /// 読み取り用ルートクラス
@@ -53,6 +41,18 @@ public class ClassesEntity
     {
         get => rootClass?.Name ?? "RootClass";
     }
+
+    /// <summary>
+    /// 非公開インナークラスリスト
+    /// </summary>
+    /// <returns>非公開インナークラスリスト</returns>
+    private List<ClassEntity> _innerClasses = new();
+
+    /// <summary>
+    /// ルートクラス
+    /// </summary>
+    /// <returns>ルートクラス</returns>
+    private ClassEntity? rootClass = null;
 
     /// <summary>
     /// 非公開コンストラクタ
