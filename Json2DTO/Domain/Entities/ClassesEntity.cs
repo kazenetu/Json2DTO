@@ -62,6 +62,25 @@ public class ClassesEntity
     }
 
     /// <summary>
+    /// インスタンス生成
+    /// </summary>
+    /// <param name="rootClassName">ルートクラス名</param>
+    /// <returns>クラス集約エンティティ インスタンス</returns>
+    public static ClassesEntity Create(string rootClassName)
+    {
+        // 入力チェック
+        if (rootClassName is null) throw new ArgumentException($"{nameof(rootClassName)} is null");
+
+        // インスタンスを返す
+        var result = new ClassesEntity()
+        {
+            rootClass = ClassEntity.Create(rootClassName!)
+        };
+
+        return result;
+    }
+
+    /// <summary>
     /// ルートクラスのプロパティ追加
     /// </summary>
     /// <param name="Property">追加対象</param>
@@ -82,24 +101,5 @@ public class ClassesEntity
 
         // インナークラスリストに追加
         _innerClasses.Add(innerClass!);
-    }
-
-    /// <summary>
-    /// インスタンス生成
-    /// </summary>
-    /// <param name="rootClassName">ルートクラス名</param>
-    /// <returns>クラス集約エンティティ インスタンス</returns>
-    public static ClassesEntity Create(string rootClassName)
-    {
-        // 入力チェック
-        if (rootClassName is null) throw new ArgumentException($"{nameof(rootClassName)} is null");
-
-        // インスタンスを返す
-        var result = new ClassesEntity()
-        {
-            rootClass = ClassEntity.Create(rootClassName!)
-        };
-
-        return result;
     }
 }
