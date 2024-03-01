@@ -122,7 +122,7 @@ public class CSConverter : IConverter
     /// </summary>
     /// <param name="indentLevel">インデントレベル</param>
     /// <returns>class文字列</returns>
-    string GetRootClassString(int indentLevel = 0)
+    private string GetRootClassString(int indentLevel = 0)
     {
         // ルートクラスを出力
         return GetClassString(_rootClass, indentLevel);
@@ -134,7 +134,7 @@ public class CSConverter : IConverter
     /// <param name="classEntity">クラスエンティティインスタンス</param>
     /// <param name="indentLevel">インデントレベル</param>
     /// <returns>class文字列</returns>
-    string GetClassString(ClassEntity classEntity, int indentLevel = 0)
+    private string GetClassString(ClassEntity classEntity, int indentLevel = 0)
     {
         var result = new StringBuilder();
 
@@ -172,7 +172,7 @@ public class CSConverter : IConverter
     /// <param name="property">プロパティValueObject</param>
     /// <param name="indentLevel">インデントレベル</param>
     /// <returns>プロパティ文字列</returns>
-    string GetPropertyString(PropertyValueObject property, int indentLevel)
+    private string GetPropertyString(PropertyValueObject property, int indentLevel)
     {
         var result = new StringBuilder();
 
@@ -195,7 +195,7 @@ public class CSConverter : IConverter
     /// </summary>
     /// <param name="property">プロパティValueObject</param>
     /// <returns>プロパティ文字列のベースと属性のタプル</returns>
-    (string propertyBaseString, string attribute) GetPropertyBaseString(PropertyValueObject property)
+    private (string propertyBaseString, string attribute) GetPropertyBaseString(PropertyValueObject property)
     {
         // C#型取得
         var typeName = property.Type switch
