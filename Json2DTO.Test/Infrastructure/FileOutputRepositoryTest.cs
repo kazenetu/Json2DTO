@@ -30,16 +30,6 @@ public class FileOutputRepositoryTest: IDisposable
         }
     }
 
-    /// <summary>
-    /// 作成済みファイルを開いてソースコード取得
-    /// </summary>
-    /// <param name="filePath">ファイルパス</param>
-    /// <returns>ソースコード文字列</returns>
-    private string ReadFile(string filePath)
-    {
-        return File.ReadAllText(filePath);
-    }
-
     [Fact]
     public void ExceptionClassInstanceNull()
     {
@@ -355,5 +345,15 @@ namespace Test
  
             index++;
         }
+    }
+
+    /// <summary>
+    /// 作成済みファイルを開いてソースコード取得
+    /// </summary>
+    /// <param name="filePath">ファイルパス</param>
+    /// <returns>ソースコード文字列</returns>
+    private string ReadFile(string filePath)
+    {
+        return File.ReadAllText(filePath);
     }
 }

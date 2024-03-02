@@ -20,29 +20,16 @@ public class ClassEntity
     public IReadOnlyList<PropertyValueObject> Properties { get { return _propertyies; } }
 
     /// <summary>
-    /// 非公開コンストラクタ
-    /// </summary>
-    private ClassEntity()
-    {
-    }
-
-    /// <summary>
     /// 非公開プロパティリスト
     /// </summary>
     /// <returns>非公開プロパティリスト</returns>
     private List<PropertyValueObject> _propertyies = new();
 
     /// <summary>
-    /// プロパティ追加
+    /// 非公開コンストラクタ
     /// </summary>
-    /// <param name="property">追加対象</param>
-    public void AddProperty(PropertyValueObject property)
+    private ClassEntity()
     {
-        // 入力チェック
-        if (property is null) throw new ArgumentException($"{nameof(property)} is null");
-
-        // プロパティリスト追加
-        _propertyies.Add(property);
     }
 
     /// <summary>
@@ -60,5 +47,18 @@ public class ClassEntity
         {
             Name = className
         };
+    }
+
+    /// <summary>
+    /// プロパティ追加
+    /// </summary>
+    /// <param name="property">追加対象</param>
+    public void AddProperty(PropertyValueObject property)
+    {
+        // 入力チェック
+        if (property is null) throw new ArgumentException($"{nameof(property)} is null");
+
+        // プロパティリスト追加
+        _propertyies.Add(property);
     }
 }

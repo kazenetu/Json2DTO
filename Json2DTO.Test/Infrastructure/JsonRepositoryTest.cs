@@ -30,28 +30,6 @@ public class JsonRepositoryTest: IDisposable
         }
     }
 
-    /// <summary>
-    /// JSONファイル作成
-    /// </summary>
-    /// <param name="json">JSON文字列</param>
-    /// <param name="fileName">ファイル名</param>
-    /// <returns>生成したファイルのパス</returns>
-    private string CreateFile(string json, string fileName)
-    {
-        // フォルダの確認と生成
-        if(!Directory.Exists(_createdDirectoryPath))
-        {
-            Directory.CreateDirectory(_createdDirectoryPath);
-        }
-        var filePath = Path.Combine(_createdDirectoryPath, fileName);
-
-        // ファイル出力
-        File.WriteAllText(filePath, json);
-
-        // 生成ファイルパスを返す
-        return filePath;
-    }
-
     #region "Common:paramNullorEmpty"
     [Fact]
     public void ExceptionTargetParamNull()
@@ -856,4 +834,26 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(false, rootClass.Properties[index].Type?.IsList);
     }
     #endregion    
+
+    /// <summary>
+    /// JSONファイル作成
+    /// </summary>
+    /// <param name="json">JSON文字列</param>
+    /// <param name="fileName">ファイル名</param>
+    /// <returns>生成したファイルのパス</returns>
+    private string CreateFile(string json, string fileName)
+    {
+        // フォルダの確認と生成
+        if(!Directory.Exists(_createdDirectoryPath))
+        {
+            Directory.CreateDirectory(_createdDirectoryPath);
+        }
+        var filePath = Path.Combine(_createdDirectoryPath, fileName);
+
+        // ファイル出力
+        File.WriteAllText(filePath, json);
+
+        // 生成ファイルパスを返す
+        return filePath;
+    }
 }
