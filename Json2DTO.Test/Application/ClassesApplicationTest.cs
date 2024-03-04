@@ -33,7 +33,7 @@ public class ClassesApplicationTest
         setuped = true;
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:TargetParam is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionTargetParamNull()
     {
         string nameSpace = "Test";
