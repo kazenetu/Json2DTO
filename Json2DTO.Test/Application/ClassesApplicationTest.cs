@@ -33,7 +33,7 @@ public class ClassesApplicationTest
         setuped = true;
     }
 
-    [Fact(DisplayName="ExceptionTest:TargetParam is null"), Trait("Category", "ApplicationTest")]
+    [Fact(DisplayName="ExceptionTest:JsonParam is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionTargetParamNull()
     {
         string nameSpace = "Test";
@@ -54,7 +54,7 @@ public class ClassesApplicationTest
         Assert.Equal("target is null or Empty", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:JsonParam is Empty"), Trait("Category", "ApplicationTest")]
     public void ExceptionTargetParamEmpty()
     {
         string nameSpace = "Test";
@@ -75,7 +75,7 @@ public class ClassesApplicationTest
         Assert.Equal("target is null or Empty", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:CommandParam is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionCommandParamNull()
     {
         string nameSpace = "Test";
@@ -100,7 +100,6 @@ public class ClassesApplicationTest
         Assert.Equal("command is null", ex.Message);
     }
 
-    [Fact]
     public void ExceptionCommandRootClassNull()
     {
         string nameSpace = "Test";
