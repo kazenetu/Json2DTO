@@ -103,8 +103,8 @@ public class ClassesApplicationTest
     public void ExceptionCommandRootClassNull()
     {
         string nameSpace = "Test";
-        string rootPath = null;
-        string rootClassName = "TestClass";
+        string rootPath = "testApplication";
+        string rootClassName = null;
         int indentSpaceCount = 2;
         string prefix = "prefix";
         string suffix = "suffix";
@@ -120,8 +120,8 @@ public class ClassesApplicationTest
         var csApplication = new ClassesApplication();
 
         #pragma warning disable
-        var ex = Assert.ThrowsAny<ArgumentException>(() => csApplication.ConvertJsonToCSharp(json, null));
-        Assert.Equal("command is null", ex.Message);
+        var ex = Assert.ThrowsAny<ArgumentException>(() => csApplication.ConvertJsonToCSharp(json, command));
+        Assert.Equal("command.RootClassName is null", ex.Message);
     }
 
     [Fact]
