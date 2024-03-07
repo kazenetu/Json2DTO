@@ -100,6 +100,7 @@ public class ClassesApplicationTest
         Assert.Equal("command is null", ex.Message);
     }
 
+    [Fact(DisplayName="ExceptionTest:Command.RootClassName is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionCommandRootClassNull()
     {
         string nameSpace = "Test";
@@ -124,7 +125,7 @@ public class ClassesApplicationTest
         Assert.Equal("command.RootClassName is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:JsonRespository is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionJsonRespositoryNull()
     {
         string nameSpace = "Test";
@@ -150,7 +151,7 @@ public class ClassesApplicationTest
         Assert.Equal("_jsonRepository is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:FileOutputRepository is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionFileOutputRepositoryNull()
     {
         string nameSpace = "Test";
@@ -176,7 +177,7 @@ public class ClassesApplicationTest
         Assert.Equal("_fileOutputRepository is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonString Result Check"), Trait("Category", "ApplicationTest")]
     public void SuccessJsonString()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.JsonString;
@@ -220,7 +221,7 @@ namespace Test
         Assert.Equal(expectedSourceCode, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonString Result Fail"), Trait("Category", "ApplicationTest")]
     public void SuccessJsonStringResultFalse()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.JsonString;
@@ -252,7 +253,7 @@ namespace Test
         Assert.Equal(string.Empty, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonFile Load"), Trait("Category", "ApplicationTest")]
     public void SuccessFilePath()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.FilePath;
@@ -295,7 +296,7 @@ namespace Test
         Assert.Equal(expectedSourceCode, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonFile Load Fail"), Trait("Category", "ApplicationTest")]
     public void SuccessFilePathResultFalse()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.FilePath;
@@ -325,7 +326,7 @@ namespace Test
         Assert.Equal(string.Empty, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:Directory Load"), Trait("Category", "ApplicationTest")]
     public void SuccessIsDirectoryPath()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.DirectoryPath;
@@ -385,7 +386,7 @@ namespace Test
         Assert.Equal(expectedSourceCode2, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:Directory Load Fail"), Trait("Category", "ApplicationTest")]
     public void SuccessIsDirectoryPathResultFalse()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.DirectoryPath;
