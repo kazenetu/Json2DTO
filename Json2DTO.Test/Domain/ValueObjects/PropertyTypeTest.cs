@@ -5,7 +5,7 @@ namespace Json2DTO.Test.Domain.ValueObjects;
 /// <summary>
 /// プロパティ型ValueObjectのテスト
 /// </summary>
-public class Domain:ValueObjects:PropertyTypeTest
+public class PropertyTypeTest
 {
     [Fact(DisplayName="ExceptionTest:Type is ErrorType"), Trait("Category", "Domain:ValueObjects:PropertyTypeTest")]
     public void ExceptionTypeObject()
@@ -142,7 +142,6 @@ public class Domain:ValueObjects:PropertyTypeTest
         Assert.Equal(isList, propertyType.IsList);
     }
 
-    [Fact]
     [Fact(DisplayName="Test:Type is classNo(1)"), Trait("Category", "Domain:ValueObjects:PropertyTypeTest")]
     public void SuccessClassNo1()
     {
