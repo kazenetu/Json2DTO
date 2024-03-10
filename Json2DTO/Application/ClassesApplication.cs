@@ -43,7 +43,7 @@ public class ClassesApplication : ApplicationBase
         // パラメータチェック
         if (string.IsNullOrEmpty(target)) throw new ArgumentException($"{nameof(target)} is null or Empty");
         if (command is null) throw new ArgumentException($"{nameof(command)} is null");
-        if (_jsonRepository.IsJsonString(target) && string.IsNullOrEmpty(command?.RootClassName)) throw new ArgumentException($"{nameof(command.RootClassName)} is null");
+        if (_jsonRepository.IsJsonString(target) && string.IsNullOrEmpty(command?.RootClassName)) throw new ArgumentException($"{nameof(command)}.{nameof(command.RootClassName)} is null");
 
         // Json取得
         var classesEnties = _jsonRepository.CreateClassEntity(target, command.RootClassName);
