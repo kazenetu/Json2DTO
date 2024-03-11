@@ -103,6 +103,9 @@ public class ClassesApplicationTest
     [Fact(DisplayName="ExceptionTest:Command.RootClassName is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionCommandRootClassNull()
     {
+        JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.JsonString;
+        FileOutputRepositoryStub.ResultSuccess = false;
+
         string nameSpace = "Test";
         string rootPath = "testApplication";
         string rootClassName = null;
