@@ -7,7 +7,7 @@ namespace Json2DTO.Test.Domain.ValueObjects;
 /// </summary>
 public class PropertyValueObjectTest
 {
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:name is null"), Trait("Category", "Domain:ValueObjects:PropertyValueObjectTest")]
     public void ExceptionNameNull()
     {
         var proprtyType = new PropertyType(typeof(string), false);
@@ -16,7 +16,7 @@ public class PropertyValueObjectTest
         Assert.Equal("name is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:name is string.Empty"), Trait("Category", "Domain:ValueObjects:PropertyValueObjectTest")]
     public void ExceptionNameEmpty()
     {
         var proprtyType = new PropertyType(typeof(string), false);
@@ -26,7 +26,7 @@ public class PropertyValueObjectTest
         Assert.Equal($"{nameof(name)} is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:type is string"), Trait("Category", "Domain:ValueObjects:PropertyValueObjectTest")]
     public void SuccessPropertyTypeString()
     {
         var proprtyType = new PropertyType(typeof(string), false);
@@ -35,7 +35,7 @@ public class PropertyValueObjectTest
         Assert.Equal(string.Empty, propertyValueObject.PropertyTypeClassName);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:type is decimal"), Trait("Category", "Domain:ValueObjects:PropertyValueObjectTest")]
     public void SuccessPropertyTypeDecimal()
     {
         var proprtyType = new PropertyType(typeof(string), false);
@@ -44,7 +44,7 @@ public class PropertyValueObjectTest
         Assert.Equal(string.Empty, propertyValueObject.PropertyTypeClassName);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:type is bool"), Trait("Category", "Domain:ValueObjects:PropertyValueObjectTest")]
     public void SuccessPropertyTypeBool()
     {
         var proprtyType = new PropertyType(typeof(bool), false);
@@ -53,7 +53,7 @@ public class PropertyValueObjectTest
         Assert.Equal(string.Empty, propertyValueObject.PropertyTypeClassName);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:type is nullable"), Trait("Category", "Domain:ValueObjects:PropertyValueObjectTest")]
     public void SuccessPropertyTypeNullable()
     {
         var proprtyType = new PropertyType(typeof(Nullable), false);
@@ -61,7 +61,7 @@ public class PropertyValueObjectTest
         Assert.Equal("Name", propertyValueObject.Name);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:type is class(1)"), Trait("Category", "Domain:ValueObjects:PropertyValueObjectTest")]
     public void SuccessClassNo1()
     {
         var classNo = 1;
@@ -71,7 +71,7 @@ public class PropertyValueObjectTest
         Assert.Equal("InnerClass", propertyValueObject.PropertyTypeClassName);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:type is class(2)"), Trait("Category", "Domain:ValueObjects:PropertyValueObjectTest")]
     public void SuccessClassNo2()
     {
         var classNo = 2;
