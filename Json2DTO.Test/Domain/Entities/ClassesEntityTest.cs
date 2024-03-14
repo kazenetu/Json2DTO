@@ -8,7 +8,7 @@ namespace Json2DTO.Test.Domain;
 /// </summary>
 public class ClassesEntityTest
 {
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:className is null"), Trait("Category", "Domain:Entity:ClassesEntityTest")]
     public void ExceptionClassNameNull()
     {
         string? rootClassName = null;
@@ -17,7 +17,7 @@ public class ClassesEntityTest
         Assert.Equal("rootClassName is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:className is Empty"), Trait("Category", "Domain:Entity:ClassesEntityTest")]
     public void ExceptionClassNameEmpty()
     {
         string rootClassName = string.Empty;
@@ -25,7 +25,7 @@ public class ClassesEntityTest
         Assert.Equal("className is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:AddRootProperty is null"), Trait("Category", "Domain:Entity:ClassesEntityTest")]
     public void ExceptionAddRootPropertyNull()
     {
         string rootClassName = "TestRootClass";
@@ -35,7 +35,7 @@ public class ClassesEntityTest
         Assert.Equal("property is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:AddInnerClass is null"), Trait("Category", "Domain:Entity:ClassesEntityTest")]
     public void ExceptionAddInnerClassNull()
     {
         string rootClassName = "TestRootClass";
@@ -45,7 +45,7 @@ public class ClassesEntityTest
         Assert.Equal("innerClass is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:RootClass"), Trait("Category", "Domain:Entity:ClassesEntityTest")]
     public void SuccessRootClassName()
     {
         string rootClassName = "TestRootClass";
@@ -53,7 +53,7 @@ public class ClassesEntityTest
         Assert.Equal("TestRootClass", classesEntity.Name);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:InnerClass is none"), Trait("Category", "Domain:Entity:ClassesEntityTest")]
     public void SuccessInnerClassesNone()
     {
         string rootClassName = "TestRootClass";
@@ -61,7 +61,7 @@ public class ClassesEntityTest
         Assert.Equal(0, classesEntity.InnerClasses.Count);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:InnerClass exists"), Trait("Category", "Domain:Entity:ClassesEntityTest")]
     public void SuccessInnerClassesExist()
     {
         string rootClassName = "TestRootClass";
@@ -72,7 +72,7 @@ public class ClassesEntityTest
         Assert.Equal("ClassName", classesEntity.InnerClasses[0].Name);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:AddRootProperty"), Trait("Category", "Domain:Entity:ClassesEntityTest")]
     public void SuccessAddRootProperty()
     {
         string rootClassName = "TestRootClass";
