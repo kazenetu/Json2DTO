@@ -119,7 +119,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"JSON elements none:{json}", ex.Message);
     }
 
-    [Fact(DisplayName="ExceptionTest:Json InnerClass is none"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    [Fact(DisplayName="ExceptionTest:Json innerClass is none"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionJsonParamInnerClassNoProperty()
     {
         var json = @"{
@@ -149,7 +149,7 @@ public class JsonRepositoryTest: IDisposable
     }
 
     [Fact(DisplayName="Test:JsonFile"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
-    public void SuccessIsJsonString_File()
+    public void SuccessIsJsonStringFile()
     {
         var target = "file.json";
 
@@ -158,7 +158,7 @@ public class JsonRepositoryTest: IDisposable
     }
 
     [Fact(DisplayName="Test:JsonDirectory"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
-    public void SuccessIsJsonString_Directory()
+    public void SuccessIsJsonStringDirectory()
     {
         var target = "files";
 
@@ -166,7 +166,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(false, repository.IsJsonString(target));
     }
 
-    [Fact(DisplayName="Test:JsonString Properties"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    [Fact(DisplayName="Test:JsonString properties"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void SuccessJsonString()
     {
         var json = @"{
@@ -255,7 +255,7 @@ public class JsonRepositoryTest: IDisposable
     }
 
     [Fact(DisplayName="Test:JsonString inner class"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
-    public void SuccessJsonStringInneerClass()
+    public void SuccessJsonStringInnerClass()
     {
         var json = @"{
             ""propObjct"" : 
@@ -302,7 +302,7 @@ public class JsonRepositoryTest: IDisposable
     }
 
     [Fact(DisplayName="Test:JsonString inner class nest"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
-    public void SuccessJsonStringInneerClassNest()
+    public void SuccessJsonStringInnerClassNest()
     {
         var json = @"{
             ""propObjct"" : 
@@ -400,7 +400,7 @@ public class JsonRepositoryTest: IDisposable
     #endregion
 
     #region "file"
-    [Fact(DisplayName="ExceptionTest:File Path not exist"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    [Fact(DisplayName="ExceptionTest:File path not exist"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionFilePathNotExist()
     {
         var filePath = "Dummy";
