@@ -138,7 +138,7 @@ public class JsonRepositoryTest: IDisposable
     }
 
     [Fact(DisplayName="Test:JsonString"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
-    public void SuccessIsJsonString_JsonString()
+    public void SuccessIsJsonStringJsonString()
     {
         var target = @"{
             ""prop_string"" : ""string""
