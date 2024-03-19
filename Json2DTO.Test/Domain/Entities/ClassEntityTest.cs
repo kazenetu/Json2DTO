@@ -8,7 +8,7 @@ namespace Json2DTO.Test.Domain;
 /// </summary>
 public class ClassEntityTest
 {
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:className is null"), Trait("Category", "Domain:Entity:ClassEntityTest")]
     public void ExceptionClassNameNull()
     {
         string? className = null;
@@ -17,7 +17,7 @@ public class ClassEntityTest
         Assert.Equal("className is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:className is Empty"), Trait("Category", "Domain:Entity:ClassEntityTest")]
     public void ExceptionClassNameEmpty()
     {
         string className = string.Empty;
@@ -25,7 +25,7 @@ public class ClassEntityTest
         Assert.Equal("className is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:property is null"), Trait("Category", "Domain:Entity:ClassEntityTest")]
     public void ExceptionPropertiesNull()
     {
         string className = "ClassName";
@@ -35,7 +35,7 @@ public class ClassEntityTest
         Assert.Equal("property is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:property is none"), Trait("Category", "Domain:Entity:ClassEntityTest")]
     public void SuccessPropertiesNone()
     {
         string className = "ClassName";
@@ -44,7 +44,7 @@ public class ClassEntityTest
         Assert.Equal(0, classEntity.Properties.Count);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:property is exist"), Trait("Category", "Domain:Entity:ClassEntityTest")]
     public void SuccessPropertiesExist()
     {
         string className = "ClassName";

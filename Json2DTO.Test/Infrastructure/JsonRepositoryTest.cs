@@ -31,7 +31,7 @@ public class JsonRepositoryTest: IDisposable
     }
 
     #region "Common:paramNullorEmpty"
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:stringParam is null"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionTargetParamNull()
     {
         string? target = null;
@@ -42,7 +42,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"target is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:stringParam is Empty"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionTargetParamEmpty()
     {
         var target = string.Empty;
@@ -55,7 +55,7 @@ public class JsonRepositoryTest: IDisposable
 
 
     #region "jsonString"
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:rootClassName is null"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionRootClassNameParamNull()
     {
         var json = @"{
@@ -75,7 +75,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"{nameof(rootClassName)} is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:rootClassName is Empty"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionRootClassNameParamEmpty()
     {
         var json = @"{
@@ -94,7 +94,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"{nameof(rootClassName)} is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:Json is error"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionJsonParamError()
     {
         var json = @"{
@@ -107,7 +107,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"JSON parse error:{json}", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:Json is none"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionJsonParamNoProperty()
     {
         var json = @"{
@@ -119,7 +119,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"JSON elements none:{json}", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:Json innerClass is none"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionJsonParamInnerClassNoProperty()
     {
         var json = @"{
@@ -137,8 +137,8 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"JSON elements none:{errorJson}", ex.Message);
     }
 
-    [Fact]
-    public void SuccessIsJsonString_JsonString()
+    [Fact(DisplayName="Test:JsonString"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    public void SuccessIsJsonStringJsonString()
     {
         var target = @"{
             ""prop_string"" : ""string""
@@ -148,8 +148,8 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(true, repository.IsJsonString(target));
     }
 
-    [Fact]
-    public void SuccessIsJsonString_File()
+    [Fact(DisplayName="Test:JsonFile"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    public void SuccessIsJsonStringFile()
     {
         var target = "file.json";
 
@@ -157,8 +157,8 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(false,repository.IsJsonString(target));
     }
 
-    [Fact]
-    public void SuccessIsJsonString_Directory()
+    [Fact(DisplayName="Test:JsonDirectory"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    public void SuccessIsJsonStringDirectory()
     {
         var target = "files";
 
@@ -166,7 +166,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(false, repository.IsJsonString(target));
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonString properties"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void SuccessJsonString()
     {
         var json = @"{
@@ -231,7 +231,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(true, rootClass.Properties[index].Type?.IsList);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonString short className"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void SuccessJsonStringShortClassName()
     {
         var json = @"{
@@ -254,8 +254,8 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(false, rootClass.Properties[index].Type?.IsList);
     }
 
-    [Fact]
-    public void SuccessJsonStringInneerClass()
+    [Fact(DisplayName="Test:JsonString inner class"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    public void SuccessJsonStringInnerClass()
     {
         var json = @"{
             ""propObjct"" : 
@@ -301,8 +301,8 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
     }
 
-    [Fact]
-    public void SuccessJsonStringInneerClassNest()
+    [Fact(DisplayName="Test:JsonString inner class nest"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    public void SuccessJsonStringInnerClassNest()
     {
         var json = @"{
             ""propObjct"" : 
@@ -400,8 +400,8 @@ public class JsonRepositoryTest: IDisposable
     #endregion
 
     #region "file"
-    [Fact]
-    public void ExceptionFilePatNotExist()
+    [Fact(DisplayName="ExceptionTest:File path not exist"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    public void ExceptionFilePathNotExist()
     {
         var filePath = "Dummy";
 
@@ -410,7 +410,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"target is not exists", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:File Json parse error"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionFileJsonError()
     {
         var json = @"{
@@ -424,7 +424,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"JSON parse error:{json}", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:File Json none"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionFileNoProperty()
     {
         var json = @"{
@@ -437,7 +437,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"JSON elements none:{json}", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:File Json innerClass none"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionFileInnerClassNoProperty()
     {
         var json = @"{
@@ -522,7 +522,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(true, rootClass.Properties[index].Type?.IsList);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:File short className"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void SuccessFileShortClassName()
     {
         var json = @"{
@@ -546,8 +546,8 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(false, rootClass.Properties[index].Type?.IsList);
     }
 
-    [Fact]
-    public void SuccessFileInneerClass()
+    [Fact(DisplayName="Test:File innerClass"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    public void SuccessFileInnerClass()
     {
         var json = @"{
             ""propObjct"" : 
@@ -595,8 +595,8 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(false, innerClass.Properties[index].Type?.IsList);
     }
 
-    [Fact]
-    public void SuccessFileInneerClassNest()
+    [Fact(DisplayName="Test:File innerClass nest"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
+    public void SuccessFileInnerClassNest()
     {
         var json = @"{
             ""propObjct"" : 
@@ -695,7 +695,7 @@ public class JsonRepositoryTest: IDisposable
     #endregion
 
     #region "directory"
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:Directory path exists"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionDirectoryPathNotExist()
     {
         var directoryPath = "Dummy";
@@ -705,7 +705,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"target is not exists", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:Directory path exists files"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionDirectoryNotExistsFiles()
     {
         Directory.CreateDirectory(_createdDirectoryPath);
@@ -715,7 +715,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"{_createdDirectoryPath} is not file", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:Directory Json error"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionDirectoryJsonError()
     {
         var json = @"{""prop_string""}";
@@ -727,7 +727,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"JSON parse error:{json}", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:Directory no properties"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionDirectoryNoProperty()
     {
         var json = @"{
@@ -740,7 +740,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"JSON elements none:{json}", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:Directory innerClass no properties"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void ExceptionDirectoryInnerClassNoProperty()
     {
         var json = @"{
@@ -759,7 +759,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal($"JSON elements none:{errorJson}", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:Directory 1file"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void SuccessDirectorySingleFile()
     {
         var json = @"{
@@ -783,7 +783,7 @@ public class JsonRepositoryTest: IDisposable
         Assert.Equal(false, rootClass.Properties[index].Type?.IsList);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:Directory 2files"), Trait("Category", "Infrastructure:JsonRepositoryTest")]
     public void SuccessDirectoryMultiFile()
     {
         var json1 = @"{

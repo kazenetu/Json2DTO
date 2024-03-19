@@ -30,7 +30,7 @@ public class FileOutputRepositoryTest: IDisposable
         }
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:classInstance is null"), Trait("Category", "Infrastructure:FileOutputRepositoryTest")]
     public void ExceptionClassInstanceNull()
     {
         ClassesEntity? classInstance = null;
@@ -56,7 +56,7 @@ public class FileOutputRepositoryTest: IDisposable
         Assert.Equal(string.Empty, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:classInstances is null"), Trait("Category", "Infrastructure:FileOutputRepositoryTest")]
     public void ExceptionClassInstancesNull()
     {
         List<ClassesEntity>? classInstance = null;
@@ -85,8 +85,8 @@ public class FileOutputRepositoryTest: IDisposable
         Assert.Equal(string.Empty, result.SourceCode);
     }
 
-    [Fact]
-    public void ExceptionClassCommmandRootNull()
+    [Fact(DisplayName="ExceptionTest:commmand.RootPath is null"), Trait("Category", "Infrastructure:FileOutputRepositoryTest")]
+    public void ExceptionClassCommmandRootPathNull()
     {
         string rootClassName = "TestRootClass";
         var classInstance = ClassesEntity.Create(rootClassName);
@@ -116,7 +116,7 @@ public class FileOutputRepositoryTest: IDisposable
         Assert.Equal(string.Empty, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:commandParams is null"), Trait("Category", "Infrastructure:FileOutputRepositoryTest")]
     public void ExceptionClassCommmandParamsNull()
     {
         string rootClassName = "TestRootClass";
@@ -141,7 +141,7 @@ public class FileOutputRepositoryTest: IDisposable
         Assert.Equal(string.Empty, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:command is null"), Trait("Category", "Infrastructure:FileOutputRepositoryTest")]
     public void ExceptionClassCommmandNull()
     {
         string rootClassName = "TestRootClass";
@@ -170,7 +170,7 @@ public class FileOutputRepositoryTest: IDisposable
         Assert.Equal(string.Empty, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:output simple file"), Trait("Category", "Infrastructure:FileOutputRepositoryTest")]
     public void SuccessClassInstance()
     {
         string rootClassName = "TestRootClass";
@@ -214,7 +214,7 @@ namespace Test
         Assert.Equal(expectedSourceCode, ReadFile(result.FileName));
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:output innerClass"), Trait("Category", "Infrastructure:FileOutputRepositoryTest")]
     public void SuccessClassInstanceInnerClass()
     {
         string rootClassName = "TestClass";
@@ -272,7 +272,7 @@ public class TestClass
         Assert.Equal(expectedSourceCode, ReadFile(result.FileName));
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:output 2files"), Trait("Category", "Infrastructure:FileOutputRepositoryTest")]
     public void SuccessClassInstances()
     {
         var classInstances = new List<ClassesEntity>();

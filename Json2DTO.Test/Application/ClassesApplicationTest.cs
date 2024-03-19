@@ -33,7 +33,7 @@ public class ClassesApplicationTest
         setuped = true;
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:JsonParam is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionTargetParamNull()
     {
         string nameSpace = "Test";
@@ -54,7 +54,7 @@ public class ClassesApplicationTest
         Assert.Equal("target is null or Empty", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:JsonParam is Empty"), Trait("Category", "ApplicationTest")]
     public void ExceptionTargetParamEmpty()
     {
         string nameSpace = "Test";
@@ -75,7 +75,7 @@ public class ClassesApplicationTest
         Assert.Equal("target is null or Empty", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:CommandParam is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionCommandParamNull()
     {
         string nameSpace = "Test";
@@ -100,12 +100,15 @@ public class ClassesApplicationTest
         Assert.Equal("command is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:Command.RootClassName is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionCommandRootClassNull()
     {
+        JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.JsonString;
+        FileOutputRepositoryStub.ResultSuccess = false;
+
         string nameSpace = "Test";
-        string rootPath = null;
-        string rootClassName = "TestClass";
+        string rootPath = "testApplication";
+        string rootClassName = null;
         int indentSpaceCount = 2;
         string prefix = "prefix";
         string suffix = "suffix";
@@ -121,11 +124,11 @@ public class ClassesApplicationTest
         var csApplication = new ClassesApplication();
 
         #pragma warning disable
-        var ex = Assert.ThrowsAny<ArgumentException>(() => csApplication.ConvertJsonToCSharp(json, null));
-        Assert.Equal("command is null", ex.Message);
+        var ex = Assert.ThrowsAny<ArgumentException>(() => csApplication.ConvertJsonToCSharp(json, command));
+        Assert.Equal("command.RootClassName is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:JsonRespository is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionJsonRespositoryNull()
     {
         string nameSpace = "Test";
@@ -151,7 +154,7 @@ public class ClassesApplicationTest
         Assert.Equal("_jsonRepository is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="ExceptionTest:FileOutputRepository is null"), Trait("Category", "ApplicationTest")]
     public void ExceptionFileOutputRepositoryNull()
     {
         string nameSpace = "Test";
@@ -177,7 +180,7 @@ public class ClassesApplicationTest
         Assert.Equal("_fileOutputRepository is null", ex.Message);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonString Result Check"), Trait("Category", "ApplicationTest")]
     public void SuccessJsonString()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.JsonString;
@@ -221,7 +224,7 @@ namespace Test
         Assert.Equal(expectedSourceCode, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonString Result Fail"), Trait("Category", "ApplicationTest")]
     public void SuccessJsonStringResultFalse()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.JsonString;
@@ -253,7 +256,7 @@ namespace Test
         Assert.Equal(string.Empty, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonFile Load"), Trait("Category", "ApplicationTest")]
     public void SuccessFilePath()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.FilePath;
@@ -296,7 +299,7 @@ namespace Test
         Assert.Equal(expectedSourceCode, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:JsonFile Load Fail"), Trait("Category", "ApplicationTest")]
     public void SuccessFilePathResultFalse()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.FilePath;
@@ -326,7 +329,7 @@ namespace Test
         Assert.Equal(string.Empty, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:Directory Load"), Trait("Category", "ApplicationTest")]
     public void SuccessIsDirectoryPath()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.DirectoryPath;
@@ -386,7 +389,7 @@ namespace Test
         Assert.Equal(expectedSourceCode2, result.SourceCode);
     }
 
-    [Fact]
+    [Fact(DisplayName="Test:Directory Load Fail"), Trait("Category", "ApplicationTest")]
     public void SuccessIsDirectoryPathResultFalse()
     {
         JsonRepositoryStub.IsResult = JsonRepositoryStub.Mode.DirectoryPath;
