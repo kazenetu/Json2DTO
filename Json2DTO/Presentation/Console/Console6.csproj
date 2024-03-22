@@ -9,9 +9,9 @@
 
   <ItemGroup>
     <ProjectReference Include="../../Lib/TinyDIContainer/TinyDIContainer.csproj" />
-    <ProjectReference Include="../../Application/Application_dotnet6.csproj" />
-    <ProjectReference Include="../../Domain/Domain_dotnet6.csproj" />
-    <ProjectReference Include="../../Infrastructure/Infrastructure_dotnet6.csproj" />
+    <ProjectReference Include="../../Application/Application6.csproj" />
+    <ProjectReference Include="../../Domain/Domain6.csproj" />
+    <ProjectReference Include="../../Infrastructure/Infrastructure6.csproj" />
   </ItemGroup>
 
 </Project>
