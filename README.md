@@ -24,19 +24,28 @@
 * JSON文字列  
   ```
   # リポジトリルートで実行(dotnet6)
-  dotnet run --project Json2DTO/Presentation/Console/Consol6.csproj CSOutput "{\"a\":1}" -ns "Test.Entity" -su "_suffix" -pr "prefix_" -rc "RootJson" -ic 4
+  dotnet run --project Json2DTO/Presentation/Console/Console6.csproj CSOutput "{\"a\":1}" -ns "Test.Entity" -su "_suffix" -pr "prefix_" -rc "RootJson" -ic 4
+
+  # リポジトリルートで実行(dotnet7)
+  dotnet run --project Json2DTO/Presentation/Console/Console7.csproj CSOutput "{\"a\":1}" -ns "Test.Entity" -su "_suffix" -pr "prefix_" -rc "RootJson" -ic 4
   ```
 
 * ファイル指定  
   ```
   # リポジトリルートで実行(dotnet6)
   dotnet run --project Json2DTO/Presentation/Console/Console6.csproj CSOutput "InputJsonFile/classA.json" -ns "Test.Entity" -su "File" -ic 2
+
+  # リポジトリルートで実行(dotnet7)
+  dotnet run --project Json2DTO/Presentation/Console/Console7.csproj CSOutput "InputJsonFile/classA.json" -ns "Test.Entity" -su "File" -ic 2
   ```
 
 * ディレクトリ指定  
   ```
   # リポジトリルートで実行(dotnet6)
   dotnet run --project Json2DTO/Presentation/Console/Console6.csproj CSOutput "InputJsonFile" -su "Directory"
+
+  # リポジトリルートで実行(dotnet7)
+  dotnet run --project Json2DTO/Presentation/Console/Console7.csproj CSOutput "InputJsonFile" -su "Directory"
   ```
 
 ## テスト方法
@@ -44,6 +53,9 @@
   ```
   # リポジトリルートで実行(dotnet6)
   dotnet test Json2DTO.Test/Json2DTO.Test6.csproj
+
+  # リポジトリルートで実行(dotnet7)
+  dotnet test Json2DTO.Test/Json2DTO.Test7.csproj
   ```
 
 ## フォルダ構成
