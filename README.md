@@ -4,9 +4,13 @@
 
 ## 実行環境
 * .NET6
+* .NET7
+* .NET8
 
 ## 実行方法
- ```dotnet run --project Json2DTO/Presentation/Console/Console.csproj <OutputPath> <targetString>  [options]```
+ ```dotnet run --project Json2DTO/Presentation/Console/Console<dotnetVersion>.csproj <OutputPath> <targetString>  [options]```
+
+* ```<dotnetVersion>``` dotnetバージョン(6~8)を指定
 
 *  ```<OutputPath>``` C#ファイル出力パス
 
