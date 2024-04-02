@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
@@ -23,9 +23,9 @@
 
   <ItemGroup>
     <ProjectReference Include="../Json2DTO/Lib/TinyDIContainer/TinyDIContainer.csproj" />
-    <ProjectReference Include="../Json2DTO/Domain/Domain.csproj" />
-    <ProjectReference Include="../Json2DTO/Infrastructure/Infrastructure.csproj" />
-    <ProjectReference Include="../Json2DTO/Application/Application.csproj" />
+    <ProjectReference Include="../Json2DTO/Domain/Domain8.csproj" />
+    <ProjectReference Include="../Json2DTO/Infrastructure/Infrastructure8.csproj" />
+    <ProjectReference Include="../Json2DTO/Application/Application8.csproj" />
   </ItemGroup>
 
 </Project>
